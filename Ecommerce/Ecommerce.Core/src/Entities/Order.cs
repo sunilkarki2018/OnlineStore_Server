@@ -9,14 +9,15 @@ namespace Ecommerce.Core.src.Entities
     public class Order
     {
         public Guid Id { get; set; }
-        public Status Status { get; set; } = Status.Registered;
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Registered;
         public DateTime OrderDate { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
+        public List<OrderItem> orderItems = new List<OrderItem>();
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum Status
+    public enum OrderStatus
     {
         Delivered,
         Canceled,

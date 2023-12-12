@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Business.src.DTOs
 {
-    public class OrderItemDTO
+    public class OrderItemReadDTO
     {
         public Guid Id { get; set; }
         public decimal Price { get; set; }

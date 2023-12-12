@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Business.src.DTOs
 {
-    public class CategoryDTO : BaseEntityDTO
+    public class CategoryReadDTO : BaseEntityDTO
     {
         public string Name { get; set; }
         public string Image { get; set; }
@@ -14,11 +14,10 @@ namespace Ecommerce.Business.src.DTOs
     {
         public string Name { get; set; }
         public string Image { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
     }
-    public class CategoryUpdateDTO : BaseEntityDTO
+    public class CategoryUpdateDTO
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
     }
