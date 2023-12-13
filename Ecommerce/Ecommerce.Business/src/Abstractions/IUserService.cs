@@ -9,11 +9,11 @@ namespace Ecommerce.Business.src.Abstractions
 {
     public interface IUserService
     {
-        IEnumerable<UserReadDTO> GetAll(GetAllParams options);
-        UserReadDTO GetOneById(Guid id);
-        UserReadDTO CreateOne(UserCreateDTO userCreateDto);
-        UserReadDTO? UpdateOne(UserUpdateDTO userUpdateDto);
-        bool DeleteOne(Guid id);
+        IEnumerable<UserReadDTO> GetAllUser(GetAllParams options);
+        UserReadDTO GetUserById(Guid id);
+        UserReadDTO CreateUser(UserCreateDTO userCreateDto);
+        UserReadDTO? UpdateUser(UserUpdateDTO userUpdateDto);
+        bool DeleteUser(Guid id);
         string Login(string email, string password);
     }
 }

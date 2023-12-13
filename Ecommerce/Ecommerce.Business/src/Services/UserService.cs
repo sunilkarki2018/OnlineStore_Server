@@ -20,7 +20,7 @@ namespace Ecommerce.Business.src.Services
             _mapper = mapper;
         }
 
-        public UserReadDTO CreateOne(UserCreateDTO userCreateDto)
+        public UserReadDTO CreateUser(UserCreateDTO userCreateDto)
         {
             var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDto));
             return _mapper.Map<User, UserReadDTO>(result);
@@ -41,23 +41,23 @@ namespace Ecommerce.Business.src.Services
 
         }
 
-        public bool DeleteOne(Guid id)
+        public bool DeleteUser(Guid id)
         {
             return _userRepo.DeleteOne(id);
         }
 
-        public IEnumerable<UserReadDTO> GetAll(GetAllParams options)
+        public IEnumerable<UserReadDTO> GetAllUser(GetAllParams options)
         {
             var result = _userRepo.GetAll(options);
             return _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(result);
         }
 
-        public UserReadDTO GetOneById(Guid id)
+        public UserReadDTO GetUserById(Guid id)
         {
-            var result = _userRepo.GetOneById(id);
-            return _mapper.Map<User, UserReadDTO>(result);
+            var user = _userRepo.GetOneById(id);
+            return _mapper.Map<User, UserReadDTO>(user);
         }
-        public UserReadDTO? UpdateOne(UserUpdateDTO userUpdateDTO)
+        public UserReadDTO? UpdateUser(UserUpdateDTO userUpdateDTO)
         {
             var existingUser = _userRepo.GetOneById(userUpdateDTO.Id);
             if (existingUser == null)
@@ -65,8 +65,7 @@ namespace Ecommerce.Business.src.Services
                 return null;
             }
             _mapper.Map<UserUpdateDTO, User>(userUpdateDTO, existingUser);
-            var result = _userRepo.UpdateOne(existingUser);
-            return _mapper.Map<User, UserReadDTO>(result);
+            return _mapper.Map<User, UserReadDTO>(_userRepo.UpdateOne(existingUser));
         }
     }
 }

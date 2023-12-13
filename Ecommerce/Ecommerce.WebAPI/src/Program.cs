@@ -24,6 +24,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IUserService, UserService>(); // tell the program to create insteace of class UserService
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 
+builder.Services.AddScoped<ICategoryService, CategoryService>(); 
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+
 //add automapper dependency injection
 // builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);

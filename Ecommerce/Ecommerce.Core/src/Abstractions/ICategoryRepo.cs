@@ -8,10 +8,10 @@ namespace Ecommerce.Core.src.Abstractions
 {
     public interface ICategoryRepo
     {
-        IEnumerable<Category> GetAll();
-        User? GetCategoryById(Guid id);
-        User CreateCategory(Category category);
-        User UpdateCategory(Category category);
+        IEnumerable<Category> GetAllCategories();
+        Category? GetCategoryById(Guid id);
+        Category CreateCategory(Category category);
+        Category UpdateCategory(Category category);
         bool DeleteCategory(Guid id);
     }
 }
