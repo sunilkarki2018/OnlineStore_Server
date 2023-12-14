@@ -5,67 +5,35 @@ using Ecommerce.Business.src.DTOs;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Abstractions;
 using Ecommerce.Core.src.Entities;
-using Ecommerce.Core.src.Paramters;
 
 namespace Ecommerce.Business.src.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>, IUserService
     {
-        private IUserRepo _userRepo;
-        private IMapper _mapper;
-
-        public UserService(IUserRepo userRepo, IMapper mapper)
+        public UserService(IUserRepo repo, IMapper mapper) : base(repo, mapper)
         {
-            _userRepo = userRepo;
-            _mapper = mapper;
         }
-
-        public UserReadDTO CreateUser(UserCreateDTO userCreateDto)
+        public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
-            var result = _userRepo.CreateOne(_mapper.Map<UserCreateDTO, User>(userCreateDto));
-            return _mapper.Map<User, UserReadDTO>(result);
-        }
-
-        public string Login(string email, string password)
-        {
-            // call the repo: _repo.FindUserByCredential(email, password)
-            // find user
-            // encrypt user data into a token
-
-            var user = new User()
+            var user = await _repo.GetByIdAsync(userId);
+            if (user is null)
             {
-                Email = email,
-                Password = password
-            };
-            return _userRepo.GenerateToken(user);
-
-        }
-
-        public bool DeleteUser(Guid id)
-        {
-            return _userRepo.DeleteOne(id);
-        }
-
-        public IEnumerable<UserReadDTO> GetAllUser(GetAllParams options)
-        {
-            var result = _userRepo.GetAll(options);
-            return _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(result);
-        }
-
-        public UserReadDTO GetUserById(Guid id)
-        {
-            var user = _userRepo.GetOneById(id);
-            return _mapper.Map<User, UserReadDTO>(user);
-        }
-        public UserReadDTO? UpdateUser(UserUpdateDTO userUpdateDTO)
-        {
-            var existingUser = _userRepo.GetOneById(userUpdateDTO.Id);
-            if (existingUser == null)
-            {
-                return null;
+                throw new Exception();
             }
-            _mapper.Map<UserUpdateDTO, User>(userUpdateDTO, existingUser);
-            return _mapper.Map<User, UserReadDTO>(_userRepo.UpdateOne(existingUser));
+            PasswordService.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
+            user.Password = hashedPassword;
+            user.Salt = salt;
+            return await _repo.UpdateOneAsync(user);
         }
+        public override async Task<UserReadDTO> CreateOneAsync(UserCreateDTO createObject)
+        {
+            PasswordService.HashPassword(createObject.Password, out string hashPassword, out byte[] salt);
+            var user = _mapper.Map<UserCreateDTO, User>(createObject);
+            user.Password = hashPassword;
+            user.Salt = salt;
+            return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
+
+        }
+
     }
 }

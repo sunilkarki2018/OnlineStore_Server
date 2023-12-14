@@ -38,14 +38,10 @@ namespace Ecommerce.WebAPI.Migrations
                     first_name = table.Column<string>(type: "text", nullable: false),
                     last_name = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
-                    role = table.Column<Role>(type: "role", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
                     avatar = table.Column<string>(type: "text", nullable: false),
-                    street = table.Column<string>(type: "text", nullable: false),
-                    state = table.Column<string>(type: "text", nullable: false),
-                    city = table.Column<string>(type: "text", nullable: false),
-                    postal_code = table.Column<string>(type: "text", nullable: false),
-                    country = table.Column<string>(type: "text", nullable: false),
+                    role = table.Column<Role>(type: "role", nullable: false),
+                    salt = table.Column<byte[]>(type: "bytea", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
@@ -84,7 +80,7 @@ namespace Ecommerce.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    status = table.Column<int>(type: "integer", nullable: false),
+                    order_status = table.Column<int>(type: "integer", nullable: false),
                     order_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },

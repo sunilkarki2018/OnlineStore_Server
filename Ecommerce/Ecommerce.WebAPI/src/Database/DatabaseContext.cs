@@ -25,15 +25,13 @@ namespace Ecommerce.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var dataSourceBuilder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
-            dataSourceBuilder.MapEnum<Role>();
-            var dataSource = dataSourceBuilder.Build();
-            optionsBuilder
-                .UseNpgsql(dataSource)
+            var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
+            builder.MapEnum<Role>();
+            optionsBuilder.UseNpgsql(builder.Build())
                 .UseSnakeCaseNamingConvention()
                    .AddInterceptors(new TimeStampInterceptor());
             // optionsBuilder.UseNpgsql("Host=localhost;Database=shopify;Username=admin");
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

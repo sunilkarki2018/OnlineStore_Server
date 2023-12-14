@@ -6,12 +6,8 @@ using Ecommerce.Core.src.Entities;
 
 namespace Ecommerce.Core.src.Abstractions
 {
-    public interface ICategoryRepo
+    public interface ICategoryRepo : IBaseRepo<Category>
     {
-        IEnumerable<Category> GetAllCategories();
-        Category? GetCategoryById(Guid id);
-        Category CreateCategory(Category category);
-        Category UpdateCategory(Category category);
-        bool DeleteCategory(Guid id);
+       
     }
 }

@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecommerce.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231212110032_Create")]
+    [Migration("20231214144138_Create")]
     partial class Create
     {
         /// <inheritdoc />
@@ -69,9 +69,9 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("order_date");
 
-                    b.Property<int>("Status")
+                    b.Property<int>("OrderStatus")
                         .HasColumnType("integer")
-                        .HasColumnName("status");
+                        .HasColumnName("order_status");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
@@ -224,16 +224,6 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("avatar");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("city");
-
-                    b.Property<string>("Country")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("country");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
@@ -258,24 +248,14 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("password");
 
-                    b.Property<string>("PostalCode")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("postal_code");
-
                     b.Property<Role>("Role")
                         .HasColumnType("role")
                         .HasColumnName("role");
 
-                    b.Property<string>("State")
+                    b.Property<byte[]>("Salt")
                         .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("state");
-
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("street");
+                        .HasColumnType("bytea")
+                        .HasColumnName("salt");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")

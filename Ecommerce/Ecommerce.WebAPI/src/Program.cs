@@ -6,6 +6,7 @@ using Ecommerce.Core.src.Abstractions;
 using Ecommerce.WebAPI.src.Database;
 using Ecommerce.WebAPI.src.Middleware;
 using Ecommerce.WebAPI.src.Repository;
+using Ecommerce.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -19,13 +20,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddMvc(options =>
+{
+    options.SuppressAsyncSuffixInActionNames = false;
+});
+
 // Add services to the container.
 // declare services
-builder.Services.AddScoped<IUserService, UserService>(); // tell the program to create insteace of class UserService
-builder.Services.AddScoped<IUserRepo, UserRepo>();
 
-builder.Services.AddScoped<ICategoryService, CategoryService>(); 
-builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<ICategoryService, CategoryService>()
+.AddScoped<ICategoryRepo, CategoryRepo>();
+
+builder.Services.AddScoped<IUserService, UserService>()
+.AddScoped<ITokenService, TokenService>()
+.AddScoped<IAuthService, AuthService>()
+.AddScoped<IUserRepo, UserRepo>();
 
 //add automapper dependency injection
 // builder.Services.AddAutoMapper(typeof(Program).Assembly);
@@ -46,7 +55,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!)),
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateLifetime = true,
@@ -66,11 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

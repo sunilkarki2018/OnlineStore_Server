@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Business.src.DTOs
 {
-    public class CategoryReadDTO : BaseEntityDTO
+    public class CategoryReadDTO
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
     }

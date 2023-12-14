@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Business.src.DTOs;
+using Ecommerce.Core.src.Entities;
 
 namespace Ecommerce.Business.src.Abstractions
 {
-    public interface ICategoryService
+    public interface ICategoryService : IBaseService<Category, CategoryReadDTO, CategoryCreateDTO, CategoryUpdateDTO>
     {
-        IEnumerable<CategoryReadDTO> GetAllCategories();
-        CategoryReadDTO? GetCategoryById(Guid id);
-        CategoryReadDTO CreateCategory(CategoryCreateDTO categoryCreateDTO);
-        CategoryReadDTO? UpdateCategory(CategoryUpdateDTO categoryUpdateDTO);
-        bool DeleteUser(Guid id);
     }
 }

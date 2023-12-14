@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Business.src.DTOs;
-using Ecommerce.Core.src.Paramters;
+using Ecommerce.Core.src.Entities;
 
 namespace Ecommerce.Business.src.Abstractions
 {
-    public interface IUserService
+    public interface IUserService : IBaseService<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>
     {
-        IEnumerable<UserReadDTO> GetAllUser(GetAllParams options);
-        UserReadDTO GetUserById(Guid id);
-        UserReadDTO CreateUser(UserCreateDTO userCreateDto);
-        UserReadDTO? UpdateUser(UserUpdateDTO userUpdateDto);
-        bool DeleteUser(Guid id);
-        string Login(string email, string password);
+        Task<bool> UpdatePasswordAsync(string newPassword, Guid userId);
     }
 }
