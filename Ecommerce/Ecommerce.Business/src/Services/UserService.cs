@@ -32,8 +32,18 @@ namespace Ecommerce.Business.src.Services
             user.Password = hashPassword;
             user.Salt = salt;
             return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
-
         }
 
+        public override async Task<bool> UpdateOneAsync(Guid id, UserUpdateDTO updateObject)
+        {
+            var existingUser = await _repo.GetByIdAsync(id);
+            if (existingUser is null)
+            {
+                return false;
+            }
+            updateObject.Password = existingUser.Password;
+            updateObject.Salt = existingUser.Salt;
+            return await _repo.UpdateOneAsync(_mapper.Map<User>(updateObject));
+        }
     }
 }

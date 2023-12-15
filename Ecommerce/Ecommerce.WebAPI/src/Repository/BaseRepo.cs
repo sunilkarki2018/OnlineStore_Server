@@ -28,10 +28,11 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public async Task<bool> DeleteOneAsync(T deleteObject)
         {
-            if (await _data.FindAsync(deleteObject) is null)
+            if (await _data.AsNoTracking().FirstOrDefaultAsync(e => e.Id == deleteObject.Id) is null)
             {
                 return false;
             }
+
             _data.Remove(deleteObject);
             await _databaseContext.SaveChangesAsync();
             return true;

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Text;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.Services;
@@ -62,6 +63,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
             ValidateIssuerSigningKey = true
         };
     });
+
+builder.Services.AddAuthorization(policy =>
+{
+    //policy.AddPolicy("SuperAdmin", policy => policy.RequireClaim(ClaimTypes.Email, "sunil@mail.com"));
+    policy.AddPolicy("Admin", policy => policy.RequireRole(ClaimTypes.Role, "Admin"));
+});
 
 var app = builder.Build();
 

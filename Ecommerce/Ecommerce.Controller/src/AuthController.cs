@@ -18,7 +18,7 @@ namespace Ecommerce.Controller.src
             _service = service;
         }
         [HttpPost()]
-        public async Task<string> Login(Credentials credentials)
+        public async Task<string> Login([FromBody] Credentials credentials)
         {
             return await _service.Login(credentials);
         }
