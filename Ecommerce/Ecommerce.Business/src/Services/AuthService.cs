@@ -16,21 +16,21 @@ namespace Ecommerce.Business.src.Services
         public AuthService(IUserRepo repo, ITokenService tokenService)
         {
             _repo = repo;
-            _tokenService=tokenService;
+            _tokenService = tokenService;
         }
         public async Task<string> Login(Credentials credentials)
         {
             var foundByEmail = await _repo.FindByEmailAsync(credentials.Email);
             if (foundByEmail is null)
             {
-                throw new Exception("not found");
+                throw CustomException.NotFoundException("User by email not found");
             }
             var isPasswordMatch = PasswordService.VerifyPassword(credentials.Password, foundByEmail.Password, foundByEmail.Salt);
             if (isPasswordMatch)
             {
                 return _tokenService.GenerateToken(foundByEmail);
             }
-            throw new Exception("not found");
+            throw CustomException.NotFoundException("User not found");
         }
     }
 }

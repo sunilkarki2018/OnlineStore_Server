@@ -20,11 +20,15 @@ namespace Ecommerce.WebAPI.src.Repository
         {
             return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
-
-       /*  public Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
+        public override async Task<IEnumerable<User>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            throw new NotImplementedException();
-        } */
+            return await _data.AsNoTracking().Include(u => u.Address).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+        }
+
+        /*  public Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
+         {
+             throw new NotImplementedException();
+         } */
 
         /*    private DbSet<User> _users;
   private DatabaseContext _database;

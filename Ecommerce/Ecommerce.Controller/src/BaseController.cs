@@ -26,7 +26,7 @@ namespace Ecommerce.Controller.src
             return Ok(await _service.DeleteOneAsync(id));
         }
         //[Authorize(Policy = "SuperAdmin")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<TReadDTO>>> GetAllAsync([FromQuery] GetAllOptions getAllOptions)
         {

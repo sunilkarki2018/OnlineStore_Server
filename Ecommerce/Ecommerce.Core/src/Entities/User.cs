@@ -15,7 +15,7 @@ namespace Ecommerce.Core.src.Entities
         public string Avatar { get; set; }
         public Role Role { get; set; } = Role.Customer;
         public byte[] Salt { get; set; }
-
+        public Address Address { get; set; }
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]

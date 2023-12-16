@@ -76,6 +76,31 @@ namespace Ecommerce.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "address",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    house_number = table.Column<string>(type: "text", nullable: false),
+                    street = table.Column<string>(type: "text", nullable: false),
+                    post_code = table.Column<string>(type: "text", nullable: false),
+                    city = table.Column<string>(type: "text", nullable: false),
+                    country = table.Column<string>(type: "text", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_address", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_address_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "orders",
                 columns: table => new
                 {
@@ -151,6 +176,12 @@ namespace Ecommerce.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "ix_address_user_id",
+                table: "address",
+                column: "user_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
                 table: "order_items",
                 column: "order_id");
@@ -184,6 +215,9 @@ namespace Ecommerce.WebAPI.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "address");
+
             migrationBuilder.DropTable(
                 name: "order_items");
 

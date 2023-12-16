@@ -24,6 +24,60 @@ namespace Ecommerce.WebAPI.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "customer" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Address", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("city");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("country");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("HouseNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("house_number");
+
+                    b.Property<string>("PostCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("post_code");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("street");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_address");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_address_user_id");
+
+                    b.ToTable("address", (string)null);
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -264,6 +318,18 @@ namespace Ecommerce.WebAPI.Migrations
                     b.ToTable("users", (string)null);
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Address", b =>
+                {
+                    b.HasOne("Ecommerce.Core.src.Entities.User", "User")
+                        .WithOne("Address")
+                        .HasForeignKey("Ecommerce.Core.src.Entities.Address", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_address_users_user_id");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
                 {
                     b.HasOne("Ecommerce.Core.src.Entities.User", "User")
@@ -328,6 +394,12 @@ namespace Ecommerce.WebAPI.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.User", b =>
+                {
+                    b.Navigation("Address")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

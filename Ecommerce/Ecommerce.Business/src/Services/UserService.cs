@@ -18,7 +18,7 @@ namespace Ecommerce.Business.src.Services
             var user = await _repo.GetByIdAsync(userId);
             if (user is null)
             {
-                throw new Exception();
+                throw CustomException.NotFoundException("User not found");
             }
             PasswordService.HashPassword(newPassword, out string hashedPassword, out byte[] salt);
             user.Password = hashedPassword;
@@ -39,11 +39,10 @@ namespace Ecommerce.Business.src.Services
             var existingUser = await _repo.GetByIdAsync(id);
             if (existingUser is null)
             {
-                return false;
+                throw CustomException.NotFoundException("User not found");
             }
-            updateObject.Password = existingUser.Password;
-            updateObject.Salt = existingUser.Salt;
-            return await _repo.UpdateOneAsync(_mapper.Map<User>(updateObject));
+            _mapper.Map<UserUpdateDTO, User>(updateObject, existingUser);
+            return await _repo.UpdateOneAsync(existingUser);
         }
     }
 }

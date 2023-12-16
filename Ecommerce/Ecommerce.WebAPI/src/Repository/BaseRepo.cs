@@ -38,14 +38,14 @@ namespace Ecommerce.WebAPI.src.Repository
             return true;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(GetAllOptions getAllOptions)
+        public virtual async Task<IEnumerable<T>> GetAllAsync(GetAllOptions getAllOptions)
         {
             return await _data.AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
 
         public async Task<T?> GetByIdAsync(Guid id)
         {
-            return await _data.FindAsync(id);
+            return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<bool> UpdateOneAsync(T updateObject)

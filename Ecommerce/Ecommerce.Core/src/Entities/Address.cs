@@ -12,7 +12,7 @@ namespace Ecommerce.Core.src.Entities
         public string PostCode { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public string UserId { get; set; }
-        public User user { get; set; }
+        public Guid UserId { get; set; }
+        public User User { get; set; }
     }
 }
