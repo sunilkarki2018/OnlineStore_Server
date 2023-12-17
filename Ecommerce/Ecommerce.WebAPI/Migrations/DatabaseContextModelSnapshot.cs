@@ -366,7 +366,7 @@ namespace Ecommerce.WebAPI.Migrations
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Product", b =>
                 {
                     b.HasOne("Ecommerce.Core.src.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
@@ -394,6 +394,11 @@ namespace Ecommerce.WebAPI.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.User", b =>

@@ -1,0 +1,14 @@
+POST http://localhost:5238/api/v1/product HTTP/1.1
+content-type: application/json
+
+{
+  "title": "HnM SHirt",
+  "price": 100,
+  "description": "A cascual shirt",
+  "images": [
+    "image1",
+    "image2"
+  ],
+  "quantity": 5,
+  "categoryId": "85a78a9c-0c86-4103-89bf-60764d979627"
+}

@@ -39,6 +39,11 @@ namespace Ecommerce.WebAPI.src.Database
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
 
+            modelBuilder.Entity<Product>()
+           .HasOne(p => p.Category) 
+           .WithMany(c => c.Products) 
+           .HasForeignKey(p => p.CategoryId);
+
             //modelBuilder.Entity<EventUser>().HasKey(e => new { e.UserId, e.EventId });
 
         }

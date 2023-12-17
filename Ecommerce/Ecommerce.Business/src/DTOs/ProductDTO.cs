@@ -12,7 +12,6 @@ namespace Ecommerce.Business.src.DTOs
         public string Description { get; set; }
         public string[] Images { get; set; }
         public int Quantity { get; set; }
-        public string CategoryName { get; set; }
     }
     public class ProductCreateDTO
     {

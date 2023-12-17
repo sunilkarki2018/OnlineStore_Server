@@ -2,12 +2,18 @@ POST http://localhost:5238/api/v1/users HTTP/1.1
 content-type: application/json
 
 {
-  "firstName": "sun",
-  "lastName": "karki",
-  "email": "sun@mail.com",
-  "role":"Customer",
+  "firstName": "sunil3",
+  "lastName": "karki3",
+  "email": "sunil@mail.com",
   "password": "test123",
-  "avatar":"imagelink1"
+  "avatar":"imagelink1", 
+  "addressCreateDTO": {
+    "houseNumber": "10",
+    "street": "katu",
+    "postCode": "11223",
+    "city": "Helsinki",
+    "country": "Finland"
+  }
 }
 
 ###
@@ -24,3 +30,32 @@ GET http://localhost:5238/api/v1/users HTTP/1.1
 content-type: application/json
 
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjliYjc5ZS1mZmNkLTRkMWYtOGYzZC1lYWY3YTkzM2UxNDciLCJyb2xlIjoiQ3VzdG9tZXIiLCJuYmYiOjE3MDI2Mjc1NTQsImV4cCI6MTcwMjgwMDM1NCwiaWF0IjoxNzAyNjI3NTU0LCJpc3MiOiJTdW5pbCIsImF1ZCI6IlN1bmlsRUNvbW1lcmNlIn0.ZLV-tDuIfObkBt0XhQ_5H5DbyRNzkCYNPcy4CQGROFY
+
+###
+GET  http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
+content-type: application/json
+
+###
+PATCH   http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
+content-type: application/json
+
+ {
+    "firstName": "sunil",
+    "lastName": "karki",
+    "email": "sunil@mail.com",
+    "avatar": "imagelink1",
+    "role": "Customer",
+    "addressUpdateDTO": {
+      "houseNumber": "11",
+      "street": "katu",
+      "postCode": "1122",
+      "city": "Helsinki",
+      "country": "Finland",
+      "id": "ef1cc041-b320-4977-bfd2-ee42d7893174"
+    },
+    "id": "c3760cca-1961-4701-a889-3329ecd7577b"
+  }
+
+###
+DELETE  http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
+content-type: application/json

@@ -1,0 +1,39 @@
+###
+POST http://localhost:5238/api/v1/categorys HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Clothes",
+  "image": "image1"
+}
+
+###
+POST http://localhost:5238/api/v1/categorys HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Electronics",
+  "image": "image1"
+}
+
+###
+GET http://localhost:5238/api/v1/categorys HTTP/1.1
+content-type: application/json
+
+###
+GET  http://localhost:5238/api/v1/categorys/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
+content-type: application/json
+
+###
+PATCH   http://localhost:5238/api/v1/categorys/b644ab66-a4b1-4fa3-8120-f533c18ff0e6 HTTP/1.1
+content-type: application/json
+
+{
+  "id": "b644ab66-a4b1-4fa3-8120-f533c18ff0e6",
+  "name": "Electronics",
+  "image": "image11"
+}
+
+###
+DELETE  http://localhost:5238/api/v1/categorys/5eb80bcf-8c42-4040-89e9-8d4633477b08 HTTP/1.1
+content-type: application/json
