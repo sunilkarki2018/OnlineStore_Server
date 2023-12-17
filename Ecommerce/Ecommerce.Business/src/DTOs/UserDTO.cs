@@ -32,4 +32,9 @@ namespace Ecommerce.Business.src.DTOs
         public AddressCreateDTO AddressCreateDTO { get; set; }
     }
 
+    public class PaginatedUserReadDTO
+    {
+        public IEnumerable<UserReadDTO> Users { get; set; }
+        public decimal PageCount { get; set; }
+    }
 }

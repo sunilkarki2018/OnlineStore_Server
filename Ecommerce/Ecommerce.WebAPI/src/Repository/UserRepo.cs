@@ -25,6 +25,12 @@ namespace Ecommerce.WebAPI.src.Repository
             return await _data.AsNoTracking().Include(u => u.Address).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
 
+        public async Task<int> GetUserRecordCountAsync(GetAllOptions getAllOptions)
+        {
+            return await _data.Where(u => u.FirstName.Contains(getAllOptions.Search) || u.LastName.Contains(getAllOptions.Search)).CountAsync();
+        }
+
+
         /*  public Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
          {
              throw new NotImplementedException();

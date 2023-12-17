@@ -5,13 +5,16 @@ using Ecommerce.Business.src.DTOs;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Abstractions;
 using Ecommerce.Core.src.Entities;
+using Ecommerce.Core.src.Shared;
 
 namespace Ecommerce.Business.src.Services
 {
     public class UserService : BaseService<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>, IUserService
     {
+        protected readonly IUserRepo _repo;
         public UserService(IUserRepo repo, IMapper mapper) : base(repo, mapper)
         {
+            _repo = repo;
         }
         public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
@@ -44,5 +47,19 @@ namespace Ecommerce.Business.src.Services
             _mapper.Map<UserUpdateDTO, User>(updateObject, existingUser);
             return await _repo.UpdateOneAsync(existingUser);
         }
+        public override Task<IEnumerable<UserReadDTO>> GetAllAsync(GetAllOptions getAllOptions)
+        {
+            return base.GetAllAsync(getAllOptions);
+        }
+        public async Task<PaginatedUserReadDTO> GetAllPaginatedUserDTOAsync(GetAllOptions getAllOptions)
+        {
+            return new PaginatedUserReadDTO()
+            {
+                Users = _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(await _repo.GetAllAsync(getAllOptions)),
+                PageCount = Math.Ceiling((decimal) await _repo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
+            };
+        }
+
+
     }
 }
