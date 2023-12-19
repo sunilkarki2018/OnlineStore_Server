@@ -2,9 +2,9 @@ POST http://localhost:5238/api/v1/users HTTP/1.1
 content-type: application/json
 
 {
-  "firstName": "sunil3",
-  "lastName": "karki3",
-  "email": "sunil@mail.com",
+  "firstName": "shantiii",
+  "lastName": "thapa",
+  "email": "shantithapa2019@gmail.com",
   "password": "test123",
   "avatar":"imagelink1", 
   "addressCreateDTO": {
@@ -21,7 +21,7 @@ POST http://localhost:5238/api/v1/auth HTTP/1.1
 content-type: application/json
 
 {
-  "email": "sunil@mail.com",
+  "email": "sunilkarki2018gmail.com",
   "password": "test123"
 }
 
@@ -36,25 +36,25 @@ GET  http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTT
 content-type: application/json
 
 ###
-PATCH   http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
+PATCH   http://localhost:5238/api/v1/users/0fbf38f5-c7f4-436d-a506-81d777ecc300 HTTP/1.1
 content-type: application/json
 
- {
-    "firstName": "sunil",
-    "lastName": "karki",
-    "email": "sunil@mail.com",
-    "avatar": "imagelink1",
-    "role": "Customer",
-    "addressUpdateDTO": {
-      "houseNumber": "11",
-      "street": "katu",
-      "postCode": "1122",
-      "city": "Helsinki",
-      "country": "Finland",
-      "id": "ef1cc041-b320-4977-bfd2-ee42d7893174"
-    },
-    "id": "c3760cca-1961-4701-a889-3329ecd7577b"
+  {
+  "id": "0fbf38f5-c7f4-436d-a506-81d777ecc300",
+  "firstName": "suniiiil",
+  "lastName": "karki",
+  "email": "sunilkarki2019@gmail.com",
+  "avatar": "string",
+  "role": "Admin",
+  "addressUpdateDTO": {
+    "id": "9dcef977-1b5c-4a2c-8e5b-337f269a7ca2",
+    "houseNumber": "10",
+    "street": "katu",
+    "postCode": "1122",
+    "city": "Helsinki",
+    "country": "Finland"
   }
+}
 
 ###
 DELETE  http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1

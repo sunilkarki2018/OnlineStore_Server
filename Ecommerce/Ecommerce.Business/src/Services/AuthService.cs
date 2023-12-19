@@ -30,7 +30,7 @@ namespace Ecommerce.Business.src.Services
             {
                 return _tokenService.GenerateToken(foundByEmail);
             }
-            throw CustomException.NotFoundException("User not found");
+            throw CustomException.InvalidLoginCredentialsException("Invalid Login Credentials");
         }
     }
 }

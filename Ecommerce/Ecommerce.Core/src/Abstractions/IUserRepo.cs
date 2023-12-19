@@ -7,5 +7,7 @@ namespace Ecommerce.Core.src.Abstractions
     {
         Task<User?> FindByEmailAsync(string email);
         Task<int> GetUserRecordCountAsync(GetAllOptions getAllOptions);
+
+        Task<bool> CheckEmailExistAsync(User user);
     }
 }

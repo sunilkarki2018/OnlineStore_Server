@@ -34,9 +34,12 @@ namespace Ecommerce.Business.src.Services
             var user = _mapper.Map<UserCreateDTO, User>(createObject);
             user.Password = hashPassword;
             user.Salt = salt;
+            if (await _repo.CheckEmailExistAsync(user))
+            {
+                throw CustomException.DuplicateEmailException("Email already exist");
+            };
             return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
         }
-
         public override async Task<bool> UpdateOneAsync(Guid id, UserUpdateDTO updateObject)
         {
             var existingUser = await _repo.GetByIdAsync(id);
@@ -45,18 +48,18 @@ namespace Ecommerce.Business.src.Services
                 throw CustomException.NotFoundException("User not found");
             }
             _mapper.Map<UserUpdateDTO, User>(updateObject, existingUser);
+            if (await _repo.CheckEmailExistAsync(existingUser))
+            {
+                throw CustomException.DuplicateEmailException("Email already exist");
+            };
             return await _repo.UpdateOneAsync(existingUser);
-        }
-        public override Task<IEnumerable<UserReadDTO>> GetAllAsync(GetAllOptions getAllOptions)
-        {
-            return base.GetAllAsync(getAllOptions);
         }
         public async Task<PaginatedUserReadDTO> GetAllPaginatedUserDTOAsync(GetAllOptions getAllOptions)
         {
             return new PaginatedUserReadDTO()
             {
                 Users = _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(await _repo.GetAllAsync(getAllOptions)),
-                PageCount = Math.Ceiling((decimal) await _repo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
+                PageCount = Math.Ceiling((decimal)await _repo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
             };
         }
 

@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controller.src
 {
-    [ApiController]
-    [Route("api/[controller]")]
     public class ProductController : BaseController<Product, ProductReadDTO, ProductCreateDTO, ProductUpdateDTO>
     {
         public ProductController(IProductService service) : base(service)

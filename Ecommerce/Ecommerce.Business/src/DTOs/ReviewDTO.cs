@@ -1,3 +1,4 @@
+using Ecommerce.Core.src.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,9 +12,8 @@ namespace Ecommerce.Business.src.DTOs
         public int Rating { get; set; }
         public string Comment { get; set; }
         public DateTime ReviewDate { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string ProductName { get; set; }
+        public Guid UserId { get; set; }
+        public Guid ProductId { get; set; }
     }
     public class ReviewCreateDTO
     {
@@ -22,6 +22,5 @@ namespace Ecommerce.Business.src.DTOs
         public DateTime ReviewDate { get; set; }
         public Guid UserId { get; set; }
         public Guid ProductId { get; set; }
-
     }
 }

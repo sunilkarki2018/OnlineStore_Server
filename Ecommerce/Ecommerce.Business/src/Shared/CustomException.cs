@@ -13,10 +13,17 @@ namespace Ecommerce.Business.src.Shared
         {
             StatusCode = statusCode;
         }
-
         public static CustomException NotFoundException(string msg = "Not found")
         {
             return new CustomException(404, msg);
+        }
+        public static CustomException DuplicateEmailException(string msg = "Email already exist")
+        {
+            return new CustomException(409, msg);
+        }
+        public static CustomException InvalidLoginCredentialsException(string msg = "Invalid Login Credentials")
+        {
+            return new CustomException(401, msg);
         }
     }
 }
