@@ -35,6 +35,10 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<OrderItemCreateDTO, OrderItem>();
 
 
+            CreateMap<Review, ReviewReadDTO>();
+            CreateMap<ReviewCreateDTO, Review>();
+
+
             /*   CreateMap<Product, ProductReadDTO>().ForMember(dest => dest.CategoryName, option => option.MapFrom(src => src.Category.Name));
               CreateMap<ProductCreateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
               CreateMap<ProductUpdateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());

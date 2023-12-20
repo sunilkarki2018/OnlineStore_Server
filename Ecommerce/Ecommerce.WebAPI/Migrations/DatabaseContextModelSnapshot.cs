@@ -21,7 +21,7 @@ namespace Ecommerce.WebAPI.Migrations
                 .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "order_status", new[] { "delivered", "canceled", "registered" });
+            NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "order_status", new[] { "registered", "delivered", "canceled", "pending" });
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "role", new[] { "admin", "customer" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
@@ -205,6 +205,9 @@ namespace Ecommerce.WebAPI.Migrations
                     b.HasKey("ProductId", "OrderId")
                         .HasName("pk_order_items");
 
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_order_items_order_id");
+
                     b.ToTable("order_items", (string)null);
                 });
 
@@ -266,6 +269,10 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("text")
                         .HasColumnName("comment");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
                     b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
                         .HasColumnName("product_id");
@@ -274,9 +281,9 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("rating");
 
-                    b.Property<DateTime>("ReviewDate")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("review_date");
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
@@ -378,6 +385,13 @@ namespace Ecommerce.WebAPI.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.OrderItem", b =>
                 {
+                    b.HasOne("Ecommerce.Core.src.Entities.Order", null)
+                        .WithMany("orderItems")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_order_items_orders_order_id");
+
                     b.HasOne("Ecommerce.Core.src.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
@@ -424,6 +438,11 @@ namespace Ecommerce.WebAPI.Migrations
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Category", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
+                {
+                    b.Navigation("orderItems");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.User", b =>

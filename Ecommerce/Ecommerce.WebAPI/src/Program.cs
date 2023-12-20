@@ -36,6 +36,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>()
 builder.Services.AddScoped<IOrderService, OrderService>()
 .AddScoped<IOrderRepo, OrderRepo>();
 
+builder.Services.AddScoped<IReviewService, ReviewService>()
+.AddScoped<IReviewRepo, ReviewRepo>();
+
 builder.Services.AddScoped<IProductService, ProductService>()
 .AddScoped<IProductRepo, ProductRepo>();
 
