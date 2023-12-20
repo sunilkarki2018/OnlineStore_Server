@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Core.src.Entities
 {
-    public class Order
+    public class Order:BaseEntity
     {
-        public Guid Id { get; set; }
-        public OrderStatus OrderStatus { get; set; } = OrderStatus.Registered;
-        public DateTime OrderDate { get; set; }
+        public OrderStatus OrderStatus { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
         public List<OrderItem> orderItems = new List<OrderItem>();

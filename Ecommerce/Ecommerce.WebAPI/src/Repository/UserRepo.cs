@@ -19,9 +19,15 @@ namespace Ecommerce.WebAPI.src.Repository
         {
             return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Email == email);
         }
+        public override async Task<User?> GetByIdAsync(Guid id)
+        {
+            var res = await _data.AsNoTracking().Include(u => u.Address).Include(u => u.Avatar).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+
+            return await _data.AsNoTracking().Include(u => u.Address).Include(u => u.Avatar).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+        }
         public override async Task<IEnumerable<User>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            return await _data.AsNoTracking().Include(u => u.Address).Where(u => u.FirstName.Contains(getAllOptions.Search) || u.LastName.Contains(getAllOptions.Search)).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+            return await _data.AsNoTracking().Include(u => u.Address).Include(u => u.Avatar).Where(u => u.FirstName.Contains(getAllOptions.Search) || u.LastName.Contains(getAllOptions.Search)).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
         public async Task<int> GetUserRecordCountAsync(GetAllOptions getAllOptions)
         {

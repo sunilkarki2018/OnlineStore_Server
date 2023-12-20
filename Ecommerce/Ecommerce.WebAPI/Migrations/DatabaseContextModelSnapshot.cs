@@ -78,6 +78,40 @@ namespace Ecommerce.WebAPI.Migrations
                     b.ToTable("address", (string)null);
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Avatar", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("data");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_id");
+
+                    b.HasKey("Id")
+                        .HasName("pk_avatar");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_avatar_user_id");
+
+                    b.ToTable("avatar", (string)null);
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Category", b =>
                 {
                     b.Property<Guid>("Id")
@@ -109,6 +143,39 @@ namespace Ecommerce.WebAPI.Migrations
                     b.ToTable("categories", (string)null);
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("data");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_image");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_image_product_id");
+
+                    b.ToTable("image", (string)null);
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
                 {
                     b.Property<Guid>("Id")
@@ -116,13 +183,17 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<DateTime>("OrderDate")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("order_date");
+                        .HasColumnName("created_at");
 
                     b.Property<int>("OrderStatus")
                         .HasColumnType("integer")
                         .HasColumnName("order_status");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
@@ -139,35 +210,35 @@ namespace Ecommerce.WebAPI.Migrations
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.OrderItem", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
-                        .HasColumnName("id");
+                        .HasColumnName("product_id");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
                         .HasColumnName("order_id");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
                         .HasColumnName("price");
-
-                    b.Property<Guid>("ProductId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("product_id");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("integer")
                         .HasColumnName("quantity");
 
-                    b.HasKey("Id")
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("ProductId", "OrderId")
                         .HasName("pk_order_items");
 
                     b.HasIndex("OrderId")
                         .HasDatabaseName("ix_order_items_order_id");
-
-                    b.HasIndex("ProductId")
-                        .HasDatabaseName("ix_order_items_product_id");
 
                     b.ToTable("order_items", (string)null);
                 });
@@ -191,11 +262,6 @@ namespace Ecommerce.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
-
-                    b.Property<string[]>("Images")
-                        .IsRequired()
-                        .HasColumnType("text[]")
-                        .HasColumnName("images");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric")
@@ -270,11 +336,6 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("Avatar")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("avatar");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("created_at");
@@ -328,6 +389,30 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasConstraintName("fk_address_users_user_id");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Avatar", b =>
+                {
+                    b.HasOne("Ecommerce.Core.src.Entities.User", "User")
+                        .WithOne("Avatar")
+                        .HasForeignKey("Ecommerce.Core.src.Entities.Avatar", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_avatar_users_user_id");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Image", b =>
+                {
+                    b.HasOne("Ecommerce.Core.src.Entities.Product", "Product")
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_image_products_product_id");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
@@ -401,9 +486,17 @@ namespace Ecommerce.WebAPI.Migrations
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Product", b =>
+                {
+                    b.Navigation("Images");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.User", b =>
                 {
                     b.Navigation("Address")
+                        .IsRequired();
+
+                    b.Navigation("Avatar")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

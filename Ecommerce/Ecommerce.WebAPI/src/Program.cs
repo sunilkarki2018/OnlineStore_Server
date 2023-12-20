@@ -35,6 +35,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>()
 builder.Services.AddScoped<IProductService, ProductService>()
 .AddScoped<IProductRepo, ProductRepo>();
 
+builder.Services.AddScoped<IAvatarService, AvatarService>()
+.AddScoped<IAvatarRepo, AvatarRepo>();
+
 builder.Services.AddScoped<IUserService, UserService>()
 .AddScoped<ITokenService, TokenService>()
 .AddScoped<IAuthService, AuthService>()

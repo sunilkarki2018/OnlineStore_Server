@@ -7,7 +7,7 @@ namespace Ecommerce.Business.src.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Avatar { get; set; }
+        public Avatar Avatar { get; set; }
         public Role Role { get; set; }
         public AddressReadDTO AddressReadDTO { get; set; }
     }
@@ -17,7 +17,7 @@ namespace Ecommerce.Business.src.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string Avatar { get; set; }
+        public AvatarUpdateDTO AvatarUpdateDTO { get; set; }
         public Role Role { get; set; }
         public AddressUpdateDTO AddressUpdateDTO { get; set; }
     }
@@ -28,7 +28,7 @@ namespace Ecommerce.Business.src.DTOs
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Avatar { get; set; }
+        //public AvatarCreateDTO AvatarCreateDTO { get; set; }
         public AddressCreateDTO AddressCreateDTO { get; set; }
     }
 

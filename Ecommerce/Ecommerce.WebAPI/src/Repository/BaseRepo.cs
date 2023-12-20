@@ -43,7 +43,7 @@ namespace Ecommerce.WebAPI.src.Repository
             return await _data.AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public virtual async Task<T?> GetByIdAsync(Guid id)
         {
             return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }

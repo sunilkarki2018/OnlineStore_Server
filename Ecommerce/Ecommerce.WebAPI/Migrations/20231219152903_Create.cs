@@ -39,7 +39,6 @@ namespace Ecommerce.WebAPI.Migrations
                     last_name = table.Column<string>(type: "text", nullable: false),
                     email = table.Column<string>(type: "text", nullable: false),
                     password = table.Column<string>(type: "text", nullable: false),
-                    avatar = table.Column<string>(type: "text", nullable: false),
                     role = table.Column<Role>(type: "role", nullable: false),
                     salt = table.Column<byte[]>(type: "bytea", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -58,7 +57,6 @@ namespace Ecommerce.WebAPI.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
-                    images = table.Column<string[]>(type: "text[]", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
                     category_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -101,13 +99,35 @@ namespace Ecommerce.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "avatar",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<byte[]>(type: "bytea", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_avatar", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_avatar_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "orders",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     order_status = table.Column<int>(type: "integer", nullable: false),
-                    order_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,6 +136,27 @@ namespace Ecommerce.WebAPI.Migrations
                         name: "fk_orders_users_user_id",
                         column: x => x.user_id,
                         principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "image",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<byte[]>(type: "bytea", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_image", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_image_products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -152,15 +193,16 @@ namespace Ecommerce.WebAPI.Migrations
                 name: "order_items",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
                     price = table.Column<decimal>(type: "numeric", nullable: false),
                     quantity = table.Column<int>(type: "integer", nullable: false),
-                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false)
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_order_items", x => x.id);
+                    table.PrimaryKey("pk_order_items", x => new { x.product_id, x.order_id });
                     table.ForeignKey(
                         name: "fk_order_items_orders_order_id",
                         column: x => x.order_id,
@@ -182,14 +224,20 @@ namespace Ecommerce.WebAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_avatar_user_id",
+                table: "avatar",
+                column: "user_id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_image_product_id",
+                table: "image",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
                 table: "order_items",
                 column: "order_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_order_items_product_id",
-                table: "order_items",
-                column: "product_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_user_id",
@@ -217,6 +265,12 @@ namespace Ecommerce.WebAPI.Migrations
         {
             migrationBuilder.DropTable(
                 name: "address");
+
+            migrationBuilder.DropTable(
+                name: "avatar");
+
+            migrationBuilder.DropTable(
+                name: "image");
 
             migrationBuilder.DropTable(
                 name: "order_items");
