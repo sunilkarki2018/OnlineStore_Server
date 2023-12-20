@@ -19,14 +19,14 @@ namespace Ecommerce.WebAPI.src.Repository
             _databaseContext = databaseContext;
             _data = _databaseContext.Set<T>();
         }
-        public async Task<T> CreateOneAsync(T createObject)
+        public virtual async Task<T> CreateOneAsync(T createObject)
         {
             await _data.AddAsync(createObject);
             await _databaseContext.SaveChangesAsync();
             return createObject;
         }
 
-        public async Task<bool> DeleteOneAsync(T deleteObject)
+        public virtual async Task<bool> DeleteOneAsync(T deleteObject)
         {
             if (await _data.AsNoTracking().FirstOrDefaultAsync(e => e.Id == deleteObject.Id) is null)
             {
@@ -48,7 +48,7 @@ namespace Ecommerce.WebAPI.src.Repository
             return await _data.AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
 
-        public async Task<bool> UpdateOneAsync(T updateObject)
+        public virtual async Task<bool> UpdateOneAsync(T updateObject)
         {
             if (await _data.AsNoTracking().FirstOrDefaultAsync(e => e.Id == updateObject.Id) is null)
             {

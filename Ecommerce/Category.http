@@ -3,7 +3,16 @@ POST http://localhost:5238/api/v1/categorys HTTP/1.1
 content-type: application/json
 
 {
-  "name": "Clothes",
+  "name": "HnM",
+  "image": "image1"
+}
+
+###
+POST http://localhost:5238/api/v1/categorys HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Zara",
   "image": "image1"
 }
 

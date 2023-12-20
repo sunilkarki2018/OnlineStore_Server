@@ -27,6 +27,7 @@ namespace Ecommerce.WebAPI.src.Database
         {
             var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
             builder.MapEnum<Role>();
+            builder.MapEnum<OrderStatus>();
             optionsBuilder.UseNpgsql(builder.Build())
                 .UseSnakeCaseNamingConvention()
                    .AddInterceptors(new TimeStampInterceptor());
@@ -37,7 +38,8 @@ namespace Ecommerce.WebAPI.src.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresEnum<Role>();
-            modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            modelBuilder.HasPostgresEnum<OrderStatus>();
+           // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
 
             modelBuilder.Entity<Product>()
            .HasOne(p => p.Category)

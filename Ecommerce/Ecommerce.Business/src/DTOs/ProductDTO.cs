@@ -11,7 +11,7 @@ namespace Ecommerce.Business.src.DTOs
         public decimal Price { get; set; }
         public string Description { get; set; }
         public int Quantity { get; set; }
-        public IEnumerable<ImageReadDTO> Images { get; set; }
+       // public IEnumerable<ImageReadDTO> Images { get; set; }
     }
     public class ProductCreateDTO
     {
@@ -20,7 +20,7 @@ namespace Ecommerce.Business.src.DTOs
         public string Description { get; set; }
         public int Quantity { get; set; }
         public Guid CategoryId { get; set; }
-        public IEnumerable<ImageCreateDTO> Images { get; set; }
+        //public IEnumerable<ImageCreateDTO> Images { get; set; }
     }
      public class ProductUpdateDTO: BaseEntityDTO
     {
@@ -29,6 +29,6 @@ namespace Ecommerce.Business.src.DTOs
         public string Description { get; set; }
         public int Quantity { get; set; }
         public Guid CategoryId { get; set; }
-        public IEnumerable<ImageUpdateDTO> Images { get; set; }
+        //public IEnumerable<ImageUpdateDTO> Images { get; set; }
     }
 }

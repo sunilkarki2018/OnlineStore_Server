@@ -13,6 +13,7 @@ namespace Ecommerce.WebAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterDatabase()
+                .Annotation("Npgsql:Enum:order_status", "delivered,canceled,registered")
                 .Annotation("Npgsql:Enum:role", "admin,customer");
 
             migrationBuilder.CreateTable(
@@ -124,7 +125,7 @@ namespace Ecommerce.WebAPI.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    order_status = table.Column<int>(type: "integer", nullable: false),
+                    order_status = table.Column<OrderStatus>(type: "order_status", nullable: false),
                     user_id = table.Column<Guid>(type: "uuid", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
@@ -141,20 +142,21 @@ namespace Ecommerce.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "image",
+                name: "order_items",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
                     product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    data = table.Column<byte[]>(type: "bytea", nullable: false),
+                    price = table.Column<decimal>(type: "numeric", nullable: false),
+                    quantity = table.Column<int>(type: "integer", nullable: false),
                     created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_image", x => x.id);
+                    table.PrimaryKey("pk_order_items", x => new { x.product_id, x.order_id });
                     table.ForeignKey(
-                        name: "fk_image_products_product_id",
+                        name: "fk_order_items_products_product_id",
                         column: x => x.product_id,
                         principalTable: "products",
                         principalColumn: "id",
@@ -189,34 +191,6 @@ namespace Ecommerce.WebAPI.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "order_items",
-                columns: table => new
-                {
-                    order_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    price = table.Column<decimal>(type: "numeric", nullable: false),
-                    quantity = table.Column<int>(type: "integer", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_order_items", x => new { x.product_id, x.order_id });
-                    table.ForeignKey(
-                        name: "fk_order_items_orders_order_id",
-                        column: x => x.order_id,
-                        principalTable: "orders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_order_items_products_product_id",
-                        column: x => x.product_id,
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "ix_address_user_id",
                 table: "address",
@@ -228,16 +202,6 @@ namespace Ecommerce.WebAPI.Migrations
                 table: "avatar",
                 column: "user_id",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_image_product_id",
-                table: "image",
-                column: "product_id");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_order_items_order_id",
-                table: "order_items",
-                column: "order_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_orders_user_id",
@@ -270,16 +234,13 @@ namespace Ecommerce.WebAPI.Migrations
                 name: "avatar");
 
             migrationBuilder.DropTable(
-                name: "image");
-
-            migrationBuilder.DropTable(
                 name: "order_items");
 
             migrationBuilder.DropTable(
-                name: "reviews");
+                name: "orders");
 
             migrationBuilder.DropTable(
-                name: "orders");
+                name: "reviews");
 
             migrationBuilder.DropTable(
                 name: "products");

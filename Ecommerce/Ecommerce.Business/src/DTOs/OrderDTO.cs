@@ -6,24 +6,19 @@ namespace Ecommerce.Business.src.DTOs
     {
         public Guid Id { get; set; }
         public OrderStatus OrderStatus { get; set; }
-        public DateTime OrderDate { get; set; }
-         public Guid UserId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public List<OrderItemReadDTO> orderItems { get; set; }=new List<OrderItemReadDTO>();
+        public Guid UserId { get; set; }
+        public User User { get; set; }
+        public List<OrderItemReadDTO> orderItems { get; set; } = new List<OrderItemReadDTO>();
     }
     public class OrderCreateDTO
     {
         public OrderStatus OrderStatus { get; set; } = OrderStatus.Registered;
-        public DateTime OrderDate { get; set; }
         public Guid UserId { get; set; }
+        public List<OrderItemCreateDTO> orderItemCreateDTOs { get; set; } = new List<OrderItemCreateDTO>();
     }
     public class OrderUpdateDTO
     {
         public Guid Id { get; set; }
         public OrderStatus Status { get; set; }
-        public DateTime OrderDate { get; set; }
-        public Guid UserId { get; set; }
     }
 }

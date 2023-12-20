@@ -1,3 +1,4 @@
+using Ecommerce.Core.src.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,12 @@ namespace Ecommerce.Business.src.DTOs
         public int Quantity { get; set; }
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
+        public Product Product { get; set; }
     }
-      public class OrderItemCreateDTO
+    public class OrderItemCreateDTO
     {
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }
-    }    
+    }
 }

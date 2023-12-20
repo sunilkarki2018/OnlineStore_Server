@@ -21,6 +21,10 @@ namespace Ecommerce.Business.src.Shared
         {
             return new CustomException(409, msg);
         }
+        public static CustomException ProductNotAvailableException(string msg = "Product is not available")
+        {
+            return new CustomException(400, msg);
+        }
         public static CustomException InvalidLoginCredentialsException(string msg = "Invalid Login Credentials")
         {
             return new CustomException(401, msg);
