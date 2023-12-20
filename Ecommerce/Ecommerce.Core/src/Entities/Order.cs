@@ -11,14 +11,15 @@ namespace Ecommerce.Core.src.Entities
         public OrderStatus OrderStatus { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
-        public List<OrderItem> orderItems = new List<OrderItem>();
+        public IEnumerable<OrderItem> orderItems { get; set; }
     }
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum OrderStatus
     {
+        Registered,
         Delivered,
         Canceled,
-        Registered
+        Pending
     }
 }

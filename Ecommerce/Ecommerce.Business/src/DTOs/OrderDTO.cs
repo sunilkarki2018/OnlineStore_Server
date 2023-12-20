@@ -8,7 +8,7 @@ namespace Ecommerce.Business.src.DTOs
         public OrderStatus OrderStatus { get; set; }
         public Guid UserId { get; set; }
         public User User { get; set; }
-        public List<OrderItemReadDTO> orderItems { get; set; } = new List<OrderItemReadDTO>();
+        public List<OrderItemReadDTO> orderItemReadDTOs { get; set; } = new List<OrderItemReadDTO>();
     }
     public class OrderCreateDTO
     {
@@ -19,6 +19,6 @@ namespace Ecommerce.Business.src.DTOs
     public class OrderUpdateDTO
     {
         public Guid Id { get; set; }
-        public OrderStatus Status { get; set; }
+        public OrderStatus OrderStatus { get; set; }
     }
 }
