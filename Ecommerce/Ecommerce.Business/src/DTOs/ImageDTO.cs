@@ -15,6 +15,7 @@ namespace Ecommerce.Business.src.DTOs
     public class ImageReadDTO
     {
         public Guid Id { get; set; }
+        public Guid ProductId { get; set; }
         public byte[] Data { get; set; }
     }
     public class ImageUpdateDTO

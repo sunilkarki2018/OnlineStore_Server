@@ -43,7 +43,7 @@ namespace Ecommerce.Controller.src
         [HttpGet("get-avatar")]
         public async Task<ActionResult<string>> GetAvatarById([FromQuery] string userId)
         {
-            return await _service.GetAvatarByUserIdAsync(Guid.Parse(userId)) ;
+            return await _service.GetAvatarByUserIdAsync(Guid.Parse(userId));
         }
     }
 

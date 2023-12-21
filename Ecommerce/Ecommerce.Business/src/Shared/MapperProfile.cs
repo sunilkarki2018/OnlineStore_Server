@@ -24,6 +24,9 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<ProductCreateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
             CreateMap<ProductUpdateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
 
+            CreateMap<ImageCreateDTO, Image>();
+            CreateMap<Image, ImageReadDTO>();
+
             CreateMap<AvatarCreateDTO, Avatar>();
             CreateMap<Avatar, AvatarReadDTO>();
 

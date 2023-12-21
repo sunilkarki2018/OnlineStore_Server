@@ -13,7 +13,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Ecommerce.WebAPI.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20231220213653_Create")]
+    [Migration("20231221170340_Create")]
     partial class Create
     {
         /// <inheritdoc />
@@ -145,6 +145,39 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasName("pk_categories");
 
                     b.ToTable("categories", (string)null);
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Image", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created_at");
+
+                    b.Property<byte[]>("Data")
+                        .IsRequired()
+                        .HasColumnType("bytea")
+                        .HasColumnName("data");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("product_id");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("updated_at");
+
+                    b.HasKey("Id")
+                        .HasName("pk_image");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_image_product_id");
+
+                    b.ToTable("image", (string)null);
                 });
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
@@ -374,6 +407,16 @@ namespace Ecommerce.WebAPI.Migrations
                         .HasConstraintName("fk_avatar_users_user_id");
                 });
 
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Image", b =>
+                {
+                    b.HasOne("Ecommerce.Core.src.Entities.Product", null)
+                        .WithMany("Images")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_image_products_product_id");
+                });
+
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
                 {
                     b.HasOne("Ecommerce.Core.src.Entities.User", "User")
@@ -446,6 +489,11 @@ namespace Ecommerce.WebAPI.Migrations
             modelBuilder.Entity("Ecommerce.Core.src.Entities.Order", b =>
                 {
                     b.Navigation("orderItems");
+                });
+
+            modelBuilder.Entity("Ecommerce.Core.src.Entities.Product", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("Ecommerce.Core.src.Entities.User", b =>

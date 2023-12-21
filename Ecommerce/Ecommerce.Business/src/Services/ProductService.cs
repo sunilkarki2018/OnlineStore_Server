@@ -13,8 +13,14 @@ namespace Ecommerce.Business.src.Services
 {
     public class ProductService : BaseService<Product, ProductReadDTO, ProductCreateDTO, ProductUpdateDTO>, IProductService
     {
-        public ProductService(IProductRepo repo, IMapper mapper) : base(repo, mapper)
+        protected readonly IProductRepo _productRepo;
+        public ProductService(IProductRepo productRepo, IMapper mapper) : base(productRepo, mapper)
         {
+            _productRepo = productRepo;
+        }
+        public override Task<ProductReadDTO> CreateOneAsync(ProductCreateDTO createObject)
+        {
+            return base.CreateOneAsync(createObject);
         }
     }
 }

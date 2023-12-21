@@ -1,4 +1,48 @@
 # Fullstack Project
+This is an Ecommerce application done as a part of final assignment in Integrify academy. It is built using react in frontend, DotNet core in backend and postgres as database.
+
+## Table of Contents
+
+1. [Technologies](#technologies)
+2. [Features](#features)
+3. [Requirements](#requirements)
+4. [Getting Started](#getting-started)
+5. [Testing](#testing)
+
+
+## Technologies
+
+### Frontend
+
+* Typescript
+* React
+* Redux (Toolkit)
+* React Router
+* Material UI
+
+### Backend
+
+* DotNet Core
+* Entity Framework
+* Postgres
+
+## Features
+
+   1. Create, edit and delete Products.
+   2. Manage user and roles.
+   3. Authenticate and Authorize user
+   3. Manage Orders and OrderItems.
+   4. Manage Reviews.
+
+
+Generate a solution file inside this repository. All the project layers of backend server should be added into this solution.
+
+
+
+
+
+
+
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
 ![SASS](https://img.shields.io/badge/SASS-v.4-hotpink)

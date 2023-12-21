@@ -13,7 +13,7 @@ namespace Ecommerce.Core.src.Entities
         public int Quantity { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        //public IEnumerable<Image> Images { get; set; }
+        public IEnumerable<Image> Images { get; set; }
         //public IEnumerable<ProductColor> Products { get; set; }
     }
     /* public class ProductColor : BaseEntity

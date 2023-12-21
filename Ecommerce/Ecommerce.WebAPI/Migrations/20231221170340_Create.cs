@@ -142,6 +142,27 @@ namespace Ecommerce.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "image",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    product_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    data = table.Column<byte[]>(type: "bytea", nullable: false),
+                    created_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    updated_at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_image", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_image_products_product_id",
+                        column: x => x.product_id,
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "reviews",
                 columns: table => new
                 {
@@ -211,6 +232,11 @@ namespace Ecommerce.WebAPI.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_image_product_id",
+                table: "image",
+                column: "product_id");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_order_items_order_id",
                 table: "order_items",
                 column: "order_id");
@@ -244,6 +270,9 @@ namespace Ecommerce.WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "avatar");
+
+            migrationBuilder.DropTable(
+                name: "image");
 
             migrationBuilder.DropTable(
                 name: "order_items");
