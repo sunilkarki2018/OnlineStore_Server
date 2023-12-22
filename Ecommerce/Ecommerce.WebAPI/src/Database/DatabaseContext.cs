@@ -30,7 +30,9 @@ namespace Ecommerce.WebAPI.src.Database
             builder.MapEnum<OrderStatus>();
             optionsBuilder.UseNpgsql(builder.Build())
                 .UseSnakeCaseNamingConvention()
-                   .AddInterceptors(new TimeStampInterceptor());
+                   .AddInterceptors(new TimeStampInterceptor())
+                   .EnableSensitiveDataLogging()
+                   .EnableDetailedErrors();
             // optionsBuilder.UseNpgsql("Host=localhost;Database=shopify;Username=admin");
             //base.OnConfiguring(optionsBuilder);
         }
@@ -41,9 +43,9 @@ namespace Ecommerce.WebAPI.src.Database
             modelBuilder.HasPostgresEnum<OrderStatus>();
            // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
 
-            modelBuilder.Entity<Product>()
+            modelBuilder.Entity<ProductLine>()
            .HasOne(p => p.Category)
-           .WithMany(c => c.Products)
+           .WithMany(c => c.ProductLines)
            .HasForeignKey(p => p.CategoryId);
 
             modelBuilder.Entity<OrderItem>().HasKey(e => new { e.ProductId, e.OrderId });

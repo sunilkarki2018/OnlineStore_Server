@@ -8,7 +8,7 @@ namespace Ecommerce.Core.src.Entities
 {
     public class Image : BaseEntity
     {
-        public Guid ProductId { get; set; }
+        public Guid ProductLineId { get; set; }
         public byte[] Data { get; set; }
     }
 }

@@ -16,13 +16,17 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<AddressCreateDTO, Address>();
             CreateMap<AddressUpdateDTO, Address>();
 
+             CreateMap<ProductLine, ProductLineReadDTO>();
+            CreateMap<ProductLineCreateDTO, ProductLine>().ForMember(dest => dest.Category, opt => opt.Ignore());
+            CreateMap<ProductLineUpdateDTO, ProductLine>().ForMember(dest => dest.Category, opt => opt.Ignore());
+
             CreateMap<Category, CategoryReadDTO>();
             CreateMap<CategoryCreateDTO, Category>();
             CreateMap<CategoryUpdateDTO, Category>();
 
             CreateMap<Product, ProductReadDTO>();
-            CreateMap<ProductCreateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
-            CreateMap<ProductUpdateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
+            CreateMap<ProductCreateDTO, Product>();
+            CreateMap<ProductUpdateDTO, Product>();
 
             CreateMap<ImageCreateDTO, Image>();
             CreateMap<Image, ImageReadDTO>();

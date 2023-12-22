@@ -32,6 +32,8 @@ builder.Services.AddMvc(options =>
 builder.Services.AddScoped<ICategoryService, CategoryService>()
 .AddScoped<ICategoryRepo, CategoryRepo>();
 
+builder.Services.AddScoped<IProductLineService, ProductLineService>()
+.AddScoped<IProductLineRepo, ProductLineRepo>();
 
 builder.Services.AddScoped<IOrderService, OrderService>()
 .AddScoped<IOrderRepo, OrderRepo>();

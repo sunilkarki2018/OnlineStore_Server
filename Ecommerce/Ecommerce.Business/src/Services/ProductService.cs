@@ -18,9 +18,5 @@ namespace Ecommerce.Business.src.Services
         {
             _productRepo = productRepo;
         }
-        public override Task<ProductReadDTO> CreateOneAsync(ProductCreateDTO createObject)
-        {
-            return base.CreateOneAsync(createObject);
-        }
     }
 }

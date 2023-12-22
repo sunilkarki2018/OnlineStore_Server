@@ -2,33 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ecommerce.Core.src.Entities;
 
 namespace Ecommerce.Business.src.DTOs
 {
     public class ProductReadDTO : BaseEntityDTO
     {
-        public string Title { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public IEnumerable<ImageReadDTO> Images { get; set; }
+        public int Inventory { get; set; }
+        public ProductLine ProductLine { get; set; } = new ProductLine();
+        public ProductSize ProductSize { get; set; } = new ProductSize();
+        public Guid ProductLineId { get; set; }
+        public Guid ProductSizeId { get; set; }
     }
     public class ProductCreateDTO
     {
-        public string Title { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public Guid CategoryId { get; set; }
-        public List<ImageCreateDTO> Images { get; set; } = new List<ImageCreateDTO>();
+        public int Inventory { get; set; }
+        public Guid ProductLineId { get; set; }
+        public Guid ProductSizeId { get; set; }
     }
     public class ProductUpdateDTO : BaseEntityDTO
     {
-        public string Title { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public Guid CategoryId { get; set; }
-        //public IEnumerable<ImageUpdateDTO> Images { get; set; }
+        public int Inventory { get; set; }
+        public Guid ProductLineId { get; set; }
+        public Guid ProductSizeId { get; set; }
     }
 }

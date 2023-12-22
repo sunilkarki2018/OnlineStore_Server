@@ -9,6 +9,6 @@ namespace Ecommerce.Core.src.Entities
     {
         public string Name { get; set; }
         public string Image { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public IEnumerable<ProductLine> ProductLines { get; set; }
     }
 }

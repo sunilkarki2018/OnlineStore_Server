@@ -30,9 +30,9 @@ namespace Ecommerce.WebAPI.src.Repository
                         var product = await _productRepo.GetByIdAsync(item.ProductId);
                         if (product == null)
                             throw CustomException.NotFoundException("Product not avaialbe to order");
-                        if (product.Quantity < item.Quantity)
+                        if (product.Inventory < item.Quantity)
                             throw CustomException.ProductNotAvailableException("Enough stock not avaialve to order");
-                        product.Quantity = product.Quantity - item.Quantity;
+                        product.Inventory = product.Inventory - item.Quantity;
                         await _productRepo.UpdateOneAsync(product);
                         item.OrderId = createObject.Id;
                         await _orderItems.AddAsync(item);

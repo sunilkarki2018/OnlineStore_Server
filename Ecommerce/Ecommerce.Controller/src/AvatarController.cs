@@ -1,9 +1,6 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
-using Ecommerce.Business.src.Services;
-using Ecommerce.Core.src.Entities;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controller.src
@@ -34,17 +31,19 @@ namespace Ecommerce.Controller.src
                     await userForm.AvatarImage.CopyToAsync(ms);
                     var content = ms.ToArray();
                     var avatar = new AvatarCreateDTO { Data = content, UserId = userForm.UserId };
-                    return await _service.CreateAvatarAsync(avatar);
+
+                   return await _service.CreateAvatarAsync(avatar);
                     //return BitConverter.ToString(content);
                 }
             }
         }
 
-        [HttpGet("get-avatar")]
+      [HttpGet("get-avatar")]
         public async Task<ActionResult<string>> GetAvatarById([FromQuery] string userId)
         {
             return await _service.GetAvatarByUserIdAsync(Guid.Parse(userId));
         }
+      
     }
 
     public class UserForm
