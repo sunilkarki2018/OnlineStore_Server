@@ -11,10 +11,10 @@ namespace Ecommerce.Business.src.Services
 {
     public class UserService : BaseService<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>, IUserService
     {
-        protected readonly IUserRepo _repo;
-        public UserService(IUserRepo repo, IMapper mapper) : base(repo, mapper)
+        protected readonly IUserRepo _userRepo;
+        public UserService(IUserRepo userRepo, IMapper mapper) : base(userRepo, mapper)
         {
-            _repo = repo;
+            _userRepo = userRepo;
         }
         public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
@@ -34,7 +34,7 @@ namespace Ecommerce.Business.src.Services
             var user = _mapper.Map<UserCreateDTO, User>(createObject);
             user.Password = hashPassword;
             user.Salt = salt;
-            if (await _repo.CheckEmailExistAsync(user))
+            if (await _userRepo.CheckEmailExistAsync(user))
             {
                 throw CustomException.DuplicateEmailException("Email already exist");
             };
@@ -42,13 +42,13 @@ namespace Ecommerce.Business.src.Services
         }
         public override async Task<bool> UpdateOneAsync(Guid id, UserUpdateDTO updateObject)
         {
-            var existingUser = await _repo.GetByIdAsync(id);
+            var existingUser = await _userRepo.GetByIdAsync(id);
             if (existingUser is null)
             {
                 throw CustomException.NotFoundException("User not found");
             }
             _mapper.Map<UserUpdateDTO, User>(updateObject, existingUser);
-            if (await _repo.CheckEmailExistAsync(existingUser))
+            if (await _userRepo.CheckEmailExistAsync(existingUser))
             {
                 throw CustomException.DuplicateEmailException("Email already exist");
             };
@@ -59,7 +59,7 @@ namespace Ecommerce.Business.src.Services
             return new PaginatedUserReadDTO()
             {
                 Users = _mapper.Map<IEnumerable<User>, IEnumerable<UserReadDTO>>(await _repo.GetAllAsync(getAllOptions)),
-                PageCount = Math.Ceiling((decimal)await _repo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
+                PageCount = Math.Ceiling((decimal)await _userRepo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
             };
         }
 

@@ -11,7 +11,6 @@ namespace Ecommerce.Test.src
 {
     public class CategoryServiceTest
     {
-
         private readonly Mock<ICategoryRepo> _mockRepo;
         private static IMapper _mapper;
 
@@ -43,16 +42,16 @@ namespace Ecommerce.Test.src
 
         [Theory]
         [ClassData(typeof(GetAllCategoriesData))]
-        public async void GetAllCategoriesAsync_ShouldReturnValidResponse(IEnumerable<Category> repoResponse, IEnumerable<CategoryReadDTO> expected)
+        public async void GetAllCategoriesAsync_ShouldReturnValidResponse(IEnumerable<Category> categoryResponse, IEnumerable<CategoryReadDTO> expected)
         {
-            var repo = new Mock<ICategoryRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
             GetAllOptions options = new GetAllOptions() { Limit = 5, Offset = 0 };
-            repo.Setup(repo => repo.GetAllAsync(options)).ReturnsAsync(repoResponse);
-            var categoryService = new CategoryService(repo.Object, _mapper);
+            categoryRepo.Setup(repo => repo.GetAllAsync(options)).ReturnsAsync(categoryResponse);
+            var categoryService = new CategoryService(categoryRepo.Object, _mapper);
 
-            var response = await categoryService.GetAllAsync(options);
+            var categoryReadDTOresponse = await categoryService.GetAllAsync(options);
 
-            Assert.Equivalent(expected, response);
+            Assert.Equivalent(expected, categoryReadDTOresponse);
         }
 
         public class GetAllCategoriesData : TheoryData<IEnumerable<Category>, IEnumerable<CategoryReadDTO>>
@@ -72,13 +71,13 @@ namespace Ecommerce.Test.src
         public async void GetCategoryByIdAsync_ShouldInvokeRepoCategoryMethod()
         {
             var id = Guid.NewGuid();
-            var repo = new Mock<ICategoryRepo>();
+            var categoryRepo = new Mock<ICategoryRepo>();
             var mapper = new Mock<IMapper>();
-            var categoryService = new CategoryService(repo.Object, _mapper);
+            var categoryService = new CategoryService(categoryRepo.Object, _mapper);
 
             await categoryService.GetByIdAsync(id);
 
-            repo.Verify(repo => repo.GetByIdAsync(id), Times.Once);
+            categoryRepo.Verify(repo => repo.GetByIdAsync(id), Times.Once);
         }
 
         [Theory]
@@ -110,9 +109,9 @@ namespace Ecommerce.Test.src
             var repo = new Mock<ICategoryRepo>();
             var mapper = new Mock<IMapper>();
             var categoryService = new CategoryService(repo.Object, _mapper);
-            CategoryCreateDTO dto = new CategoryCreateDTO() { Name = "Hnm", Image = "image1" };
+            CategoryCreateDTO categoryCreateDTO = new CategoryCreateDTO() { Name = "Hnm", Image = "image1" };
 
-            await categoryService.CreateOneAsync(dto);
+            await categoryService.CreateOneAsync(categoryCreateDTO);
 
             repo.Verify(repo => repo.CreateOneAsync(It.IsAny<Category>()), Times.Once);
         }
