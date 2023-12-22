@@ -41,7 +41,7 @@ namespace Ecommerce.WebAPI.src.Database
         {
             modelBuilder.HasPostgresEnum<Role>();
             modelBuilder.HasPostgresEnum<OrderStatus>();
-           // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
+            // modelBuilder.Entity<User>(entity => entity.Property(e => e.Role).HasColumnType("role"));
 
             modelBuilder.Entity<ProductLine>()
            .HasOne(p => p.Category)
@@ -49,6 +49,32 @@ namespace Ecommerce.WebAPI.src.Database
            .HasForeignKey(p => p.CategoryId);
 
             modelBuilder.Entity<OrderItem>().HasKey(e => new { e.ProductId, e.OrderId });
+
+            modelBuilder.Entity<Category>(e =>
+            {
+                e.HasData(SeedingData.GetCategories());
+            });
+
+            modelBuilder.Entity<ProductSize>(e =>
+            {
+                e.HasData(SeedingData.GetProductSizes());
+            });
+
+            modelBuilder.Entity<ProductLine>(e =>
+            {
+                e.HasData(SeedingData.GetProductLines());
+            });
+
+            modelBuilder.Entity<Image>(e =>
+            {
+                e.HasData(SeedingData.GetImages());
+            });
+
+            modelBuilder.Entity<Product>(e =>
+            {
+                e.HasData(SeedingData.GetProducts());
+            });
+
         }
 
     }
