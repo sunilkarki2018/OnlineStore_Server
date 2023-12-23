@@ -6,9 +6,9 @@ namespace Ecommerce.Core.src.Entities
     {
         public int Inventory { get; set; }
         public ProductLine ProductLine { get; set; }
-        public ProductSize ProductSize { get; set; }
+        public ProductSize? ProductSize { get; set; }
         public Guid ProductLineId { get; set; }
-        public Guid ProductSizeId { get; set; }
+        public Guid? ProductSizeId { get; set; }
     }
     public class ProductSize : BaseEntity
     {

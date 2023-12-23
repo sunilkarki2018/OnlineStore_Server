@@ -2,23 +2,9 @@ POST http://localhost:5238/api/v1/products HTTP/1.1
 content-type: application/json
 
 {
-  "title": "HnM SHirt",
-  "price": 100,
-  "description": "A cascual shirt",
-  "quantity": 50,
-  "categoryId": "dfb2ccf3-b301-445b-b38f-9d8b61062602"
-}
-
-###
-POST http://localhost:5238/api/v1/products HTTP/1.1
-content-type: application/json
-
-{
-  "title": "Zara SHirt",
-  "price": 80,
-  "description": "A cascual shirt",
-  "quantity": 70,
-  "categoryId": "d40004e0-93e9-4193-a9a5-088d4e20bb38"
+  "inventory": 25,
+  "productLineId": "11bd0f6a-68c2-4004-a3da-2049e9eb1198",
+  "productSizeId": "3f11df1b-3508-4344-8fa8-f95e3c6f4fdb"
 }
 
 ###
@@ -30,20 +16,14 @@ GET http://localhost:5238/api/v1/products/80f34112-e69a-4bd6-bf58-271d888aa7ba H
 content-type: application/json
 
 ###
-PATCH  http://localhost:5238/api/v1/products/80f34112-e69a-4bd6-bf58-271d888aa7ba HTTP/1.1
+PATCH  http://localhost:5238/api/v1/products/e30b2333-6197-4955-adff-63db6beb6b45 HTTP/1.1
 content-type: application/json
 
 {
-  "id": "80f34112-e69a-4bd6-bf58-271d888aa7ba",
-  "title": "HnM Shirt",
-  "price": 105,
-  "description": "A cascual shirt",
-  "images": [
-    "image1",
-    "image2"
-  ],
-  "quantity": 5,
-  "categoryId": "7fd495e9-27b0-4c54-a7bb-2513fe5e4f9e"
+  "id":"e30b2333-6197-4955-adff-63db6beb6b45",
+  "inventory": 35,
+  "productLineId": "11bd0f6a-68c2-4004-a3da-2049e9eb1198",
+  "productSizeId": "3f11df1b-3508-4344-8fa8-f95e3c6f4fdb"
 }
 
 ######

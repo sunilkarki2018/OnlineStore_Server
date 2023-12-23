@@ -1,12 +1,10 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Business.src.Shared;
-using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Ecommerce.Controller.src
 {
@@ -22,7 +20,7 @@ namespace Ecommerce.Controller.src
         }
         [Authorize(Roles = "Admin")]
         [HttpPost("")]
-        public new async Task<ActionResult<ProductLineReadDTO>> CreateProductLineAsync([FromForm] ProductLineCreateForm productLineCreateForm)
+        public async Task<ActionResult<ProductLineReadDTO>> CreateProductLineAsync([FromForm] ProductLineCreateForm productLineCreateForm)
         {
             var productLineCreateDTO = new ProductLineCreateDTO();
 
@@ -78,13 +76,12 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _productLineService.GetAllAsync(getAllOptions));
         }
-        [AllowAnonymous]
+
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<ProductLineReadDTO>> GetProductLinesByIdAsync([FromRoute] Guid id)
         {
             return Ok(await _productLineService.GetByIdAsync(id));
         }
-
     }
 
     public class ProductLineCreateForm
