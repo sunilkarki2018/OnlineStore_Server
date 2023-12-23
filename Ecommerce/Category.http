@@ -11,18 +11,11 @@ content-type: application/json
 POST http://localhost:5238/api/v1/categorys HTTP/1.1
 content-type: application/json
 
-{
-  "name": "Zara",
-  "image": "image1"
-}
-
-###
-POST http://localhost:5238/api/v1/categorys HTTP/1.1
-content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJmY2Q4NTJmOC0zNzUwLTQ3ZDQtYTU0My00MjQ1ODYwOThkYWUiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQG1haWwuY29tIiwibmJmIjoxNzAzMzI5MDM3LCJleHAiOjE3MDM1MDE4MzcsImlhdCI6MTcwMzMyOTAzNywiaXNzIjoiU3VuaWwiLCJhdWQiOiJTdW5pbEVDb21tZXJjZSJ9.UJVzA_1JjBqCZNoS02Ggsp4xNAWbwER6PO2eCFzoMJQ
 
 {
-  "name": "Electronics",
-  "image": "image1"
+  "name": "Test",
+  "image": "testimage"
 }
 
 ###

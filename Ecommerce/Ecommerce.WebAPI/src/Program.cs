@@ -83,6 +83,8 @@ builder.Services.AddAuthorization(policy =>
 {
     //policy.AddPolicy("SuperAdmin", policy => policy.RequireClaim(ClaimTypes.Email, "sunil@mail.com"));
     policy.AddPolicy("Admin", policy => policy.RequireRole(ClaimTypes.Role, "Admin"));
+    policy.AddPolicy("Customer", policy => policy.RequireRole(ClaimTypes.Role, "Customer"));
+    policy.AddPolicy("AdminOrCustomer", policy => policy.RequireRole(ClaimTypes.Role, "Admin","Customer"));
 });
 
 var app = builder.Build();

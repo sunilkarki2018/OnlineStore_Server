@@ -38,8 +38,6 @@ content-type: application/json
 GET http://localhost:5238/api/v1/users HTTP/1.1
 content-type: application/json
 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI2NjliYjc5ZS1mZmNkLTRkMWYtOGYzZC1lYWY3YTkzM2UxNDciLCJyb2xlIjoiQ3VzdG9tZXIiLCJuYmYiOjE3MDI2Mjc1NTQsImV4cCI6MTcwMjgwMDM1NCwiaWF0IjoxNzAyNjI3NTU0LCJpc3MiOiJTdW5pbCIsImF1ZCI6IlN1bmlsRUNvbW1lcmNlIn0.ZLV-tDuIfObkBt0XhQ_5H5DbyRNzkCYNPcy4CQGROFY
-
 ###
 GET  http://localhost:5238/api/v1/users/0642c029-557e-4818-b288-2cf8d9d921df HTTP/1.1
 content-type: application/json

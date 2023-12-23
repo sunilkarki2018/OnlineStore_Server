@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Core.src.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controller.src
@@ -17,6 +18,7 @@ namespace Ecommerce.Controller.src
         {
             _service = service;
         }
+        [AllowAnonymous]
         [HttpPost()]
         public async Task<string> Login([FromBody] Credentials credentials)
         {

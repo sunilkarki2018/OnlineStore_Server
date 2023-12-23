@@ -9,7 +9,6 @@ namespace Ecommerce.Controller.src
     [Route("api/[controller]")]
     public class AvatarController
     {
-
         protected readonly IAvatarService _service;
         public AvatarController(IAvatarService service)
         {
@@ -32,18 +31,18 @@ namespace Ecommerce.Controller.src
                     var content = ms.ToArray();
                     var avatar = new AvatarCreateDTO { Data = content, UserId = userForm.UserId };
 
-                   return await _service.CreateAvatarAsync(avatar);
+                    return await _service.CreateAvatarAsync(avatar);
                     //return BitConverter.ToString(content);
                 }
             }
         }
 
-      [HttpGet("get-avatar")]
+        [HttpGet("get-avatar")]
         public async Task<ActionResult<string>> GetAvatarById([FromQuery] string userId)
         {
             return await _service.GetAvatarByUserIdAsync(Guid.Parse(userId));
         }
-      
+
     }
 
     public class UserForm

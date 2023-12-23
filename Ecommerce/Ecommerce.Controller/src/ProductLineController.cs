@@ -1,6 +1,7 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Core.src.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,7 @@ namespace Ecommerce.Controller.src
         {
             _productLineService = productLineService; ;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-product-line")]
         public new async Task<ActionResult<ProductLineReadDTO>> CreateProductLineAsync([FromForm] ProductLineForm productLineForm)
         {
@@ -46,8 +47,6 @@ namespace Ecommerce.Controller.src
             }
             return await _productLineService.CreateOneAsync(productLineCreateDTO);
         }
-
-
     }
 
     public class ProductLineForm
