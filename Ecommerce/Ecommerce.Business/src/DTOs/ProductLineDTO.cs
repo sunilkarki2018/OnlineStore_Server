@@ -5,6 +5,7 @@ namespace Ecommerce.Business.src.DTOs
 {
     public class ProductLineReadDTO
     {
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
@@ -19,7 +20,7 @@ namespace Ecommerce.Business.src.DTOs
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        public List<ImageCreateDTO> ImageCreateDTOs { get; set; }
+        public List<ImageCreateDTO> ImageCreateDTOs { get; set; } = new List<ImageCreateDTO>();
     }
     public class ProductLineUpdateDTO
     {
@@ -28,7 +29,7 @@ namespace Ecommerce.Business.src.DTOs
         public string Description { get; set; }
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
-        public IEnumerable<ImageUpdateDTO> ImageUpdateDTOs { get; set; }
+        //public Category Category { get; set; }
+        //public List<ImageUpdateDTO> ImageUpdateDTOs { get; set; } = new List<ImageUpdateDTO>();
     }
 }

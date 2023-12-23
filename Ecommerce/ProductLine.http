@@ -1,0 +1,22 @@
+###
+GET http://localhost:5238/api/v1/productlines HTTP/1.1
+content-type: application/json
+
+###
+GET http://localhost:5238/api/v1/productlines/80f34112-e69a-4bd6-bf58-271d888aa7ba HTTP/1.1
+content-type: application/json
+
+
+###
+PATCH  http://localhost:5238/api/v1/productlines/80f34112-e69a-4bd6-bf58-271d888aa7ba HTTP/1.1
+content-type: application/json
+
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMmUwMmYyMS04OGI2LTRhODktYTcwMS1mNTZmMzY0MWIzMjgiLCJyb2xlIjoiQWRtaW4iLCJlbWFpbCI6ImFkbWluQG1haWwuY29tIiwibmJmIjoxNzAzMzYzMTk4LCJleHAiOjE3MDM1MzU5OTgsImlhdCI6MTcwMzM2MzE5OCwiaXNzIjoiU3VuaWwiLCJhdWQiOiJTdW5pbEVDb21tZXJjZSJ9.O_ry9A7cUAm63MdHeXCV9yYVh58IQmmDxF0Npe2iP30
+
+{
+   "id": "ae12fea8-46dc-4008-b389-f41f43c34740",
+  "title": "Test Shirt1 updated",
+  "description": "Very nice and comfortable updated",
+  "price": 110,
+  "categoryId": "306c9811-6a32-4ed6-b7b1-291ca1318ddc"
+}

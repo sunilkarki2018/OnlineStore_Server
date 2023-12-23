@@ -9,17 +9,19 @@ namespace Ecommerce.Business.src.DTOs
 {
     public class ImageCreateDTO
     {
-        public Guid ProductId { get; set; }
+        public Guid ProductLineId { get; set; }
         public byte[] Data { get; set; }
     }
     public class ImageReadDTO
     {
         public Guid Id { get; set; }
-        public Guid ProductId { get; set; }
+        public Guid ProductLineId { get; set; }
         public byte[] Data { get; set; }
     }
     public class ImageUpdateDTO
     {
+        public Guid Id { get; set; }
+        public Guid ProductLineId { get; set; }
         public byte[] Data { get; set; }
     }
 }

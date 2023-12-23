@@ -17,7 +17,12 @@ namespace Ecommerce.WebAPI.src.Repository
         }
         public override async Task<IEnumerable<ProductLine>> GetAllAsync(GetAllOptions getAllOptions)
         {
-             return await _data.Include(u => u.Images).AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+            return await _data.Include(u => u.Images).AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+        }
+        public override async Task<ProductLine?> GetByIdAsync(Guid id)
+        {
+            return await _data.Include(u => u.Images).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+
         }
     }
 }
