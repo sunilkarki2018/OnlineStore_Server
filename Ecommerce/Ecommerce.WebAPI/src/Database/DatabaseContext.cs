@@ -75,6 +75,23 @@ namespace Ecommerce.WebAPI.src.Database
                 e.HasData(SeedingData.GetProducts());
             });
 
+
+            modelBuilder.Entity<User>(e =>
+            {
+                e.HasData(SeedingData.GetUser());
+            });
+
+            modelBuilder.Entity<Address>(e =>
+            {
+                e.HasData(SeedingData.GetAddresses());
+            });
+
+            modelBuilder.Entity<Avatar>(e =>
+            {
+                e.HasData(SeedingData.GetAvatars());
+            });
+
+
         }
 
     }

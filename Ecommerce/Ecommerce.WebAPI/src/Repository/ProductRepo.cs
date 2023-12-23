@@ -11,5 +11,13 @@ namespace Ecommerce.WebAPI.src.Repository
         public ProductRepo(DatabaseContext databaseContext) : base(databaseContext)
         {
         }
+        public override async Task<IEnumerable<Product>> GetAllAsync(GetAllOptions getAllOptions)
+        {
+            return await _data.Include(u => u.ProductLine).Include(u => u.ProductSize).AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+        }
+        public override async Task<Product?> GetByIdAsync(Guid id)
+        {
+            return await _data.Include(u => u.ProductLine).Include(u => u.ProductSize).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+        }
     }
 }

@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Ecommerce.Core.src.Entities
 {
     public class Product : BaseEntity
@@ -11,6 +13,7 @@ namespace Ecommerce.Core.src.Entities
     public class ProductSize : BaseEntity
     {
         public int Value { get; set; }
+        [JsonIgnore]
         public IEnumerable<Product> Products { get; set; }
     }
 }

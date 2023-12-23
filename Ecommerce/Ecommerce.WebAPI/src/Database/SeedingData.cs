@@ -1,4 +1,5 @@
-﻿using Ecommerce.Core.src.Entities;
+﻿using Ecommerce.Business.src.Shared;
+using Ecommerce.Core.src.Entities;
 
 namespace Ecommerce.WebAPI.src.Database
 {
@@ -262,6 +263,76 @@ namespace Ecommerce.WebAPI.src.Database
             ProductSizeId = productSize4
         };
 
+        private static Guid adminGuid1 = Guid.NewGuid();
+        private static Guid customerGuid1 = Guid.NewGuid();
+
+        public static List<User> GetUser()
+        {
+            PasswordService.HashPassword("admin123", out string adminhashedPassword, out byte[] adminsalt);
+            PasswordService.HashPassword("customer123", out string customerhashedPassword, out byte[] usersalt);
+
+            return new List<User>
+            {
+                new User
+        {
+            Id =adminGuid1,
+            FirstName = "JohnAdmin",
+            LastName = "Doe",
+            Email = "admin@mail.com",
+            Password = adminhashedPassword,
+            Role = Role.Admin,
+            Salt = adminsalt,
+        }
+                ,
+                new User
+        {
+            Id = customerGuid1,
+            FirstName = "Jane",
+            LastName = "Doe",
+            Email = "customer@mail.com",
+            Password = customerhashedPassword,
+            Role = Role.Customer,
+            Salt = usersalt,
+        }
+            };
+        }
+
+        private static Address address1 = new Address
+        {
+            Id = Guid.NewGuid(),
+            HouseNumber = "123",
+            Street = "Main St",
+            PostCode = "12345",
+            City = "Cityville",
+            Country = "Countryland",
+            UserId = adminGuid1
+        };
+
+        private static Address address2 = new Address
+        {
+            Id = Guid.NewGuid(),
+            HouseNumber = "456",
+            Street = "Oak St",
+            PostCode = "67890",
+            City = "Townsville",
+            Country = "Countryland",
+            UserId = customerGuid1
+        };
+
+        private static Avatar avatar1 = new Avatar
+        {
+            Id = Guid.NewGuid(),
+            UserId = adminGuid1,
+            Data = new byte[] { 0x04, 0x05, 0x06 }
+        };
+        private static Avatar avatar2 = new Avatar
+        {
+            Id = Guid.NewGuid(),
+            UserId = customerGuid1,
+            Data = new byte[] { 0x0A, 0x0B, 0x0C }
+        };
+
+
 
 
         private static byte[] GenerateRandomImageData(int width, int height)
@@ -274,17 +345,24 @@ namespace Ecommerce.WebAPI.src.Database
             }
             return imageData;
         }
+        public static List<Avatar> GetAvatars()
+        {
+            return new List<Avatar>() { avatar1, avatar2 };
+        }
+
+        public static List<Address> GetAddresses()
+        {
+            return new List<Address>() { address1, address2 };
+        }
 
         public static List<Category> GetCategories()
         {
             return new List<Category>() { category1, category2, category3, category4, category5 };
         }
-
         public static List<ProductSize> GetProductSizes()
         {
             return new List<ProductSize>() { size1, size2, size3, size4 };
         }
-
 
         public static List<Image> GetImages()
         {
