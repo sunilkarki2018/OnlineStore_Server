@@ -10,5 +10,6 @@ namespace Ecommerce.Business.src.Abstractions
 {
     public interface IReviewService : IBaseService<Review, ReviewReadDTO, ReviewCreateDTO, ReviewUpdateDTO>
     {
+        Task<ReviewReadDTO> CreateReviewAsync(Guid userId, ReviewCreateDTO reviewCreateDTO);
     }
 }

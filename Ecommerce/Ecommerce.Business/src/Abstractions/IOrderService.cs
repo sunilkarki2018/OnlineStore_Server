@@ -5,5 +5,7 @@ namespace Ecommerce.Business.src.Abstractions
 {
     public interface IOrderService : IBaseService<Order, OrderReadDTO, OrderCreateDTO, OrderUpdateDTO>
     {
+        Task<OrderReadDTO> CreateOrderAsync(Guid userId,OrderCreateDTO orderCreateDTO);
+
     }
 }

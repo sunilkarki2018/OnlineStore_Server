@@ -4,6 +4,7 @@ using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.Services;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Abstractions;
+using Ecommerce.WebAPI.src.Authorization;
 using Ecommerce.WebAPI.src.Database;
 using Ecommerce.WebAPI.src.Middleware;
 using Ecommerce.WebAPI.src.Repository;
@@ -30,7 +31,7 @@ builder.Services.AddSwaggerGen(
         options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
         {
             Description = "Bearer token authentication",
-            Name = "Authentication", // --> this should be "Authorization", because in the request header, "Authentication" is not the right Property name
+            Name = "Authorization", // --> this should be "Authorization", because in the request header, "Authentication" is not the right Property name
             In = ParameterLocation.Header,
             Scheme = "Bearer"
         }
@@ -78,6 +79,9 @@ builder.Services.AddScoped<IUserService, UserService>()
 // builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
+//AUthorization handler
+builder.Services.AddSingleton<AdminOrOwnerHandler>();
+
 // Error handler middleware
 // builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
@@ -106,7 +110,7 @@ builder.Services.AddAuthorization(policy =>
     //policy.AddPolicy("SuperAdmin", policy => policy.RequireClaim(ClaimTypes.Email, "sunil@mail.com"));
     policy.AddPolicy("Admin", policy => policy.RequireRole(ClaimTypes.Role, "Admin"));
     policy.AddPolicy("Customer", policy => policy.RequireRole(ClaimTypes.Role, "Customer"));
-    policy.AddPolicy("AdminOrCustomer", policy => policy.RequireRole(ClaimTypes.Role, "Admin","Customer"));
+    policy.AddPolicy("AdminOrOwner", policy => policy.Requirements.Add(new AdminOrOwnerRequirement()));
 });
 
 var app = builder.Build();

@@ -24,7 +24,6 @@ namespace Ecommerce.WebAPI.src.Repository
             {
                 try
                 {
-                    await base.CreateOneAsync(createObject);
                     foreach (var item in createObject.orderItems)
                     {
                         var product = await _productRepo.GetByIdAsync(item.ProductId);
@@ -35,7 +34,7 @@ namespace Ecommerce.WebAPI.src.Repository
                         product.Inventory = product.Inventory - item.Quantity;
                         await _productRepo.UpdateOneAsync(product);
                         item.OrderId = createObject.Id;
-                        await _orderItems.AddAsync(item);
+                        await base.CreateOneAsync(createObject);
                     }
                     await _databaseContext.SaveChangesAsync();
                     transaction.Commit();

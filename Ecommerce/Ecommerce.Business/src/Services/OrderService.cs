@@ -22,6 +22,13 @@ namespace Ecommerce.Business.src.Services
             _orderRepo = repo;
         }
 
+        public async Task<OrderReadDTO> CreateOrderAsync(Guid userId, OrderCreateDTO orderCreateDTO)
+        {
+            var order = _mapper.Map<OrderCreateDTO, Order>(orderCreateDTO);
+            order.UserId = userId;
+            return _mapper.Map<Order, OrderReadDTO>(await _orderRepo.CreateOneAsync(order));
+        }
+
         public override async Task<bool> UpdateOneAsync(Guid id, OrderUpdateDTO updateObject)
         {
             var existingOrder = await _orderRepo.GetByIdAsync(id);

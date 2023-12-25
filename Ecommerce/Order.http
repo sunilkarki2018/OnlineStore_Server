@@ -1,0 +1,26 @@
+
+###
+POST http://localhost:5238/api/v1/orders HTTP/1.1
+content-type: application/json
+
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhOWJjYTdkYy1iMTE1LTRjMTUtODNmMy04MTlhNmZjNzAwYjQiLCJyb2xlIjoiQ3VzdG9tZXIiLCJlbWFpbCI6ImN1c3RvbWVyQG1haWwuY29tIiwibmJmIjoxNzAzNDEwODA1LCJleHAiOjE3MDM1ODM2MDUsImlhdCI6MTcwMzQxMDgwNSwiaXNzIjoiU3VuaWwiLCJhdWQiOiJTdW5pbEVDb21tZXJjZSJ9.2K_wJ06KpAYYGIYCUkhfRrdnoCgFla40UHyPnDgghkA
+
+{
+  "orderStatus": "Canceled",
+  "userId": "a9bca7dc-b115-4c15-83f3-819a6fc700b4",
+  "orderItemCreateDTOs": [
+    {
+      "price": 99.95,
+      "quantity": 5,
+      "productId": "2d59db21-9d76-4426-a415-36302eb7fdab"
+    }
+  ]
+}
+
+PATCH  http://localhost:5238/api/v1/orders/381a4bea-b247-4b1d-a0bc-2f585ea68e18 HTTP/1.1
+content-type: application/json
+
+{
+  "id": "381a4bea-b247-4b1d-a0bc-2f585ea68e18",
+  "orderStatus": "Pending"
+}
