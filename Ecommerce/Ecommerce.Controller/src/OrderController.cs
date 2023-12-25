@@ -1,5 +1,6 @@
 ﻿using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
+using Ecommerce.Business.src.Services;
 using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
 using Microsoft.AspNetCore.Authorization;
@@ -27,7 +28,7 @@ namespace Ecommerce.Controller.src
         {
             var authenticatedClaims = HttpContext.User;
             var userId = authenticatedClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
-            return await _orderService.CreateOrderAsync(new Guid(userId), createObject);
+            return CreatedAtAction(nameof(CreateOneAsync), await _orderService.CreateOrderAsync(new Guid(userId), createObject));
         }
         [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<bool>> UpdateOneAsync([FromRoute] Guid id, [FromBody] OrderUpdateDTO updateObject)

@@ -31,7 +31,6 @@ namespace Ecommerce.Business.src.DTOs
         //public AvatarCreateDTO AvatarCreateDTO { get; set; }
         public AddressCreateDTO AddressCreateDTO { get; set; }
     }
-
     public class PaginatedUserReadDTO
     {
         public IEnumerable<UserReadDTO> Users { get; set; }

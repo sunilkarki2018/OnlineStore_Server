@@ -21,9 +21,19 @@ namespace Ecommerce.Controller.src
         }
         [Authorize(Roles = "Admin")]
         [HttpGet("paginated-users")]
-        public async Task<ActionResult<PaginatedUserReadDTO>> GetPaginatedUsersAllAsync([FromQuery] GetAllOptions getAllOptions)
+        public async Task<ActionResult<PaginatedUserReadDTO>> GetPaginatedUsersAsync([FromQuery] GetAllOptions getAllOptions)
         {
             return Ok(await _service.GetAllPaginatedUserDTOAsync(getAllOptions));
+        }
+        [Authorize(Roles = "Admin")]
+        public override Task<ActionResult<bool>> UpdateOneAsync([FromRoute] Guid id, [FromBody] UserUpdateDTO updateObject)
+        {
+            return base.UpdateOneAsync(id, updateObject);
+        }
+        [Authorize(Roles = "Admin")]
+        public override Task<ActionResult<bool>> DeleteOneAsync([FromRoute] Guid id)
+        {
+            return base.DeleteOneAsync(id);
         }
     }
 }

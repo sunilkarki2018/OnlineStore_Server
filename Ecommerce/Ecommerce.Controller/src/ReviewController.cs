@@ -22,11 +22,22 @@ namespace Ecommerce.Controller.src
             _reviewService = reviewService;
         }
         [Authorize(Roles = "Customer")]
-        public async Task<ActionResult<ReviewReadDTO>> CreateOneAsync([FromBody] ReviewCreateDTO createObject)
+        public async Task<ActionResult<ReviewReadDTO>> CreateReviewAsync([FromBody] ReviewCreateDTO createObject)
         {
             var authenticatedClaims = HttpContext.User;
             var userId = authenticatedClaims.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
-            return await _reviewService.CreateReviewAsync(new Guid(userId), createObject);
+            return CreatedAtAction(nameof(CreateReviewAsync), await _reviewService.CreateReviewAsync(new Guid(userId), createObject));
+        }
+        [HttpGet()]
+        public virtual async Task<ActionResult<IEnumerable<ReviewReadDTO>>> GetAllReviewsAsync([FromQuery] GetAllOptions getAllOptions)
+        {
+            return Ok(await _reviewService.GetAllAsync(getAllOptions));
+        }
+        [AllowAnonymous]
+        [HttpGet("{id:guid}")]
+        public virtual async Task<ActionResult<ReviewReadDTO>> GetByIdAsync([FromRoute] Guid id)
+        {
+            return Ok(await _reviewService.GetByIdAsync(id));
         }
     }
 }

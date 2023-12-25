@@ -62,7 +62,5 @@ namespace Ecommerce.Business.src.Services
                 PageCount = Math.Ceiling((decimal)await _userRepo.GetUserRecordCountAsync(getAllOptions) / getAllOptions.Limit)
             };
         }
-
-
     }
 }

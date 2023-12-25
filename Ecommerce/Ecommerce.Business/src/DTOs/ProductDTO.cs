@@ -26,4 +26,9 @@ namespace Ecommerce.Business.src.DTOs
         public Guid ProductLineId { get; set; }
         public Guid? ProductSizeId { get; set; }
     }
+    public class PaginatedProductReadDTO
+    {
+        public IEnumerable<ProductReadDTO> Products { get; set; }
+        public decimal PageCount { get; set; }
+    }
 }

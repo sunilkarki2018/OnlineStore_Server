@@ -34,7 +34,6 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _service.GetAllAsync(getAllOptions));
         }
-        [AllowAnonymous]
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<TReadDTO>> GetByIdAsync([FromRoute] Guid id)
         {

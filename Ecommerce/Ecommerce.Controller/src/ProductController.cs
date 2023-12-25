@@ -1,6 +1,7 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Core.src.Entities;
+using Ecommerce.Core.src.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,8 +33,11 @@ namespace Ecommerce.Controller.src
         {
             return base.DeleteOneAsync(id);
         }
-
+        [Authorize(Roles = "Admin")]
+        [HttpGet("paginated-products")]
+        public async Task<ActionResult<PaginatedProductReadDTO>> GetPaginatedProductsAsync([FromQuery] GetAllOptions getAllOptions)
+        {
+            return Ok(await _service.GetAllPaginatedProductDTOAsync(getAllOptions));
+        }
     }
-
-
 }

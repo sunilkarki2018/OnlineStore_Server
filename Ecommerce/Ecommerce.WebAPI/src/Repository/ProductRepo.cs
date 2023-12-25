@@ -19,5 +19,10 @@ namespace Ecommerce.WebAPI.src.Repository
         {
             return await _data.Include(u => u.ProductLine).Include(u => u.ProductSize).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
+
+        public async Task<int> GetProductsRecordCountAsync(GetAllOptions getAllOptions)
+        {
+            return await _data.CountAsync();
+        }
     }
 }
