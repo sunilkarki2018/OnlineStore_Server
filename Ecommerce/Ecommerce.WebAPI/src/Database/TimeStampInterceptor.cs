@@ -10,7 +10,7 @@ namespace Ecommerce.WebAPI.src.Database
 {
         public class TimeStampInterceptor : SaveChangesInterceptor
     {
-        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+     public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             var changedData = eventData.Context!.ChangeTracker.Entries(); // give collections of all entities experiencing the changes: Added or Updated, Deleted
             var updatedEntries = changedData.Where(entity => entity.State == EntityState.Modified);

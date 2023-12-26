@@ -25,7 +25,8 @@ namespace Ecommerce.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("LocalDb"));
+            /*
+            var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("ElephantDb"));
             builder.MapEnum<Role>();
             builder.MapEnum<OrderStatus>();
             optionsBuilder.UseNpgsql(builder.Build())
@@ -33,8 +34,8 @@ namespace Ecommerce.WebAPI.src.Database
                    .AddInterceptors(new TimeStampInterceptor())
                    .EnableSensitiveDataLogging()
                    .EnableDetailedErrors();
-            // optionsBuilder.UseNpgsql("Host=localhost;Database=shopify;Username=admin");
-            //base.OnConfiguring(optionsBuilder);
+            */
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

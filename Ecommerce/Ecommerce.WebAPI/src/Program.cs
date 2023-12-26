@@ -1,29 +1,43 @@
+using System.Drawing;
 using System.Security.Claims;
 using System.Text;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.Services;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Abstractions;
+using Ecommerce.Core.src.Entities;
 using Ecommerce.WebAPI.src.Authorization;
 using Ecommerce.WebAPI.src.Database;
 using Ecommerce.WebAPI.src.Middleware;
 using Ecommerce.WebAPI.src.Repository;
 using Ecommerce.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Npgsql;
 using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-
 
 builder.Services.AddSwaggerGen(
     options =>
@@ -39,8 +53,6 @@ builder.Services.AddSwaggerGen(
         options.OperationFilter<SecurityRequirementsOperationFilter>();
     }
 );
-
-
 
 //builder.Services.AddSwaggerGen();
 
@@ -86,8 +98,23 @@ builder.Services.AddSingleton<AdminOrOwnerHandler>();
 // builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
+
+var connectionString = builder.Configuration.GetConnectionString("LocalDb");
+var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
+dataSourceBuilder.MapEnum<Role>();
+dataSourceBuilder.MapEnum<OrderStatus>();
+var dataSource = dataSourceBuilder.Build();
+
+
 // Add database contect service
-builder.Services.AddDbContext<DatabaseContext>(options => options.UseNpgsql());
+builder.Services.AddDbContext<DatabaseContext>(options =>
+{
+    options.UseNpgsql(dataSource)
+         .UseSnakeCaseNamingConvention()
+         .AddInterceptors(new TimeStampInterceptor())
+                  .EnableSensitiveDataLogging()
+                  .EnableDetailedErrors(); ;
+});
 
 // Config authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o =>
@@ -114,6 +141,8 @@ builder.Services.AddAuthorization(policy =>
 });
 
 var app = builder.Build();
+
+app.UseCors();
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 

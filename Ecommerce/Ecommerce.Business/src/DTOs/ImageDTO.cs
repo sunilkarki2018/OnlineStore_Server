@@ -17,6 +17,7 @@ namespace Ecommerce.Business.src.DTOs
         public Guid Id { get; set; }
         public Guid ProductLineId { get; set; }
         public byte[] Data { get; set; }
+        public string ImgBase64Data { get; set; }
     }
     public class ImageUpdateDTO
     {

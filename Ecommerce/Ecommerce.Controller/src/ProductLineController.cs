@@ -19,7 +19,8 @@ namespace Ecommerce.Controller.src
             _productLineService = productLineService; ;
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost("")]
+        [HttpPost()]
+        [Consumes("multipart/form-data")]
         public async Task<ActionResult<ProductLineReadDTO>> CreateProductLineAsync([FromForm] ProductLineCreateForm productLineCreateForm)
         {
             var productLineCreateDTO = new ProductLineCreateDTO();
@@ -74,13 +75,41 @@ namespace Ecommerce.Controller.src
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<ProductLineReadDTO>>> GetAllProductLinesAsync([FromQuery] GetAllOptions getAllOptions)
         {
-            return Ok(await _productLineService.GetAllAsync(getAllOptions));
+            var productLineReadDTOs = await _productLineService.GetAllAsync(getAllOptions);
+            var result = ConvertImageDataToBase64(productLineReadDTOs.ToList());
+            return Ok(result);
+        }
+
+        private List<ProductLineReadDTO> ConvertImageDataToBase64(List<ProductLineReadDTO> productLines)
+        {
+            foreach (var productLine in productLines)
+            {
+                if (productLine.ImageReadDTOs != null)
+                {
+                    foreach (var imageReadDto in productLine.ImageReadDTOs)
+                    {
+                        if (imageReadDto.Data != null)
+                        {
+                            imageReadDto.ImgBase64Data = Convert.ToBase64String(imageReadDto.Data);
+                        }
+                    }
+                }
+            }
+            return productLines;
         }
 
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<ProductLineReadDTO>> GetProductLinesByIdAsync([FromRoute] Guid id)
         {
-            return Ok(await _productLineService.GetByIdAsync(id));
+            var productLineDTO = await _productLineService.GetByIdAsync(id);
+            foreach (var imageReadDto in productLineDTO.ImageReadDTOs)
+            {
+                if (imageReadDto.Data != null)
+                {
+                    imageReadDto.ImgBase64Data = Convert.ToBase64String(imageReadDto.Data);
+                }
+            }
+            return Ok(productLineDTO);
         }
     }
 
@@ -90,7 +119,7 @@ namespace Ecommerce.Controller.src
         public decimal Price { get; set; }
         public string Description { get; set; }
         public Guid CategoryId { get; set; }
-        public List<IFormFile> Images { get; set; }
+        public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
     }
     public class ProductLineUpdateForm
     {

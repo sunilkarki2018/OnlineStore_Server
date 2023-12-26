@@ -11,7 +11,7 @@ namespace Ecommerce.Business.src.DTOs
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
-        public IEnumerable<ImageReadDTO> ImageReadDTOs { get; set; }
+        public List<ImageReadDTO> ImageReadDTOs { get; set; }
     }
     public class ProductLineCreateDTO
     {

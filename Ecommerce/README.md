@@ -28,11 +28,17 @@ This is an Ecommerce application done as a part of final assignment in Integrify
 
 ## Features
 
-   1. Create, edit and delete Products.
+   1. Create, View, edit and delete Products.
+   2. Create, View, edit and delete Product Lines.
    2. Manage user and roles.
    3. Authenticate and Authorize user
    3. Manage Orders and OrderItems.
    4. Manage Reviews.
+
+
+
+
+
 
 
 Generate a solution file inside this repository. All the project layers of backend server should be added into this solution.
