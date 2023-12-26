@@ -1,30 +1,55 @@
 # Fullstack Project
-This is an Ecommerce application done as a part of final assignment in Integrify academy. It is built using react in frontend, DotNet core in backend and postgres as database.
+## Introduction
+This is an Ecommerce application design and deployed as a final assignment in Integrify academy. It is built using react in frontend, DotNet core in backend and postgres as database. The primary objective of this project is to develop a robust software application using best practices. 
 
 ## Table of Contents
 
 1. [Technologies](#technologies)
+2. [File Structure](#filestructure)
+2. [Achitecture](#architecture)
 2. [Features](#features)
+2. [Functionalities](#functionalities)
 3. [Requirements](#requirements)
 4. [Getting Started](#getting-started)
 5. [Testing](#testing)
 
-
 ## Technologies
 
-### Frontend
+   ### Frontend
 
-* Typescript
-* React
-* Redux (Toolkit)
-* React Router
-* Material UI
+      * Typescript
+      * React
+      * Redux (Toolkit)
+      * React Router
+      * Material UI
 
-### Backend
+   ### Backend
 
-* DotNet Core
-* Entity Framework
-* Postgres
+      * DotNet Core
+      * Entity Framework
+      * Postgres
+
+## File Structure
+- ECOMMERCE
+  - Ecommerce.Business
+  - Ecommerce.Controller
+  - Ecommerce.Core
+  - Ecommerce.HttpTest
+  - Ecommerce.Test
+  - Ecommerce.WebAPI
+  - Ecommerce.sln
+  - README.md
+
+## Architecture
+
+   This project is developed following clean architecture. The architecture ensures system is more scalable for future enhancement and maintainability. It consist of
+   1. WebAPI Layer
+   2. Controller Layer
+   3. Business Layer
+   4. Core Layer
+
+## ERD Diagram
+   ![ERD Diagram](ERDDiagram.png)
 
 ## Features
 
@@ -34,6 +59,10 @@ This is an Ecommerce application done as a part of final assignment in Integrify
    3. Authenticate and Authorize user
    3. Manage Orders and OrderItems.
    4. Manage Reviews.
+
+## Functionalities
+
+
 
 
 
