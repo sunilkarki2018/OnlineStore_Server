@@ -49,6 +49,18 @@ namespace Ecommerce.WebAPI.src.Database
            .WithMany(c => c.ProductLines)
            .HasForeignKey(p => p.CategoryId);
 
+
+            modelBuilder.Entity<Product>()
+           .HasOne(p => p.ProductLine)
+           .WithMany(c => c.Products)
+           .HasForeignKey(p => p.ProductLineId);
+
+
+            modelBuilder.Entity<Product>()
+           .HasOne(p => p.ProductSize)
+           .WithMany(c => c.Products)
+           .HasForeignKey(p => p.ProductSizeId);
+
             modelBuilder.Entity<OrderItem>().HasKey(e => new { e.ProductId, e.OrderId });
 
             modelBuilder.Entity<Category>(e =>

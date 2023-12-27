@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Ecommerce.Core.src.Entities
@@ -13,5 +14,7 @@ namespace Ecommerce.Core.src.Entities
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
         public IEnumerable<Image> Images { get; set; }
+        [JsonIgnore]
+        public IEnumerable<Product> Products { get; set; }
     }
 }

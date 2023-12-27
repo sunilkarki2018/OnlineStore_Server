@@ -79,6 +79,9 @@ builder.Services.AddScoped<IReviewService, ReviewService>()
 builder.Services.AddScoped<IProductService, ProductService>()
 .AddScoped<IProductRepo, ProductRepo>();
 
+builder.Services.AddScoped<IProductSizeService, ProductSizeService>()
+.AddScoped<IProductSizeRepo, ProductSizeRepo>();
+
 builder.Services.AddScoped<IAvatarService, AvatarService>()
 .AddScoped<IAvatarRepo, AvatarRepo>();
 

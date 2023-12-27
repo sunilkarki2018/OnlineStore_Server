@@ -9,8 +9,8 @@ namespace Ecommerce.Business.src.DTOs
     public class ProductReadDTO : BaseEntityDTO
     {
         public int Inventory { get; set; }
-        public ProductLine ProductLine { get; set; } = new ProductLine();
-        public ProductSize ProductSize { get; set; } = new ProductSize();
+        public ProductLineReadDTO? ProductLine { get; set; }
+        public ProductSizeReadDTO? ProductSize { get; set; }
         public Guid ProductLineId { get; set; }
         public Guid? ProductSizeId { get; set; }
     }
@@ -20,7 +20,7 @@ namespace Ecommerce.Business.src.DTOs
         public Guid ProductLineId { get; set; }
         public Guid? ProductSizeId { get; set; }
     }
-    public class ProductUpdateDTO : BaseEntityDTO
+      public class ProductUpdateDTO : BaseEntityDTO
     {
         public int Inventory { get; set; }
         public Guid ProductLineId { get; set; }

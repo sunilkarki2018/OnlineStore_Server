@@ -17,16 +17,16 @@ namespace Ecommerce.Controller.src
 {
     public class UserController : BaseController<User, UserReadDTO, UserCreateDTO, UserUpdateDTO>
     {
-        protected readonly IUserService _service;
-        public UserController(IUserService service, IAvatarService avatarService) : base(service)
+        protected readonly IUserService _userService;
+        public UserController(IUserService userService, IAvatarService avatarService) : base(userService)
         {
-            _service = service;
+            _userService = userService;
         }
         [Authorize(Roles = "Admin")]
         [HttpGet("paginated-users")]
         public async Task<ActionResult<PaginatedUserReadDTO>> GetPaginatedUsersAsync([FromQuery] GetAllOptions getAllOptions)
         {
-            return Ok(await _service.GetAllPaginatedUserDTOAsync(getAllOptions));
+            return Ok(await _userService.GetAllPaginatedUserDTOAsync(getAllOptions));
         }
         [HttpPost("create-users")]
         [Consumes("multipart/form-data")]
@@ -59,7 +59,7 @@ namespace Ecommerce.Controller.src
                 userCreateDTO.AddressCreateDTO.Country = userCreateForm.Country;
 
             }
-            return CreatedAtAction(nameof(CreateUserAsync), await _service.CreateOneAsync(userCreateDTO));
+            return CreatedAtAction(nameof(CreateUserAsync), await _userService.CreateOneAsync(userCreateDTO));
         }
 
         [Authorize(Roles = "Admin")]
