@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
@@ -27,12 +28,13 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _service.GetAllPaginatedUserDTOAsync(getAllOptions));
         }
-        [HttpGet("create-users")]
+        [HttpPost("create-users")]
+        [Consumes("multipart/form-data")]
         public new async Task<ActionResult<UserReadDTO>> CreateUserAsync([FromForm] UserCreateForm userCreateForm)
         {
             var userCreateDTO = new UserCreateDTO();
 
-            if (userCreateDTO.AvatarCreateDTO == null)
+            if (userCreateForm.Avatar == null)
             {
                 throw CustomException.NotFoundException("avatar is missing");
             }
@@ -41,20 +43,21 @@ namespace Ecommerce.Controller.src
                 userCreateDTO.FirstName = userCreateForm.FirstName;
                 userCreateDTO.LastName = userCreateForm.LastName;
                 userCreateDTO.Email = userCreateForm.Email;
-                userCreateDTO.AddressCreateDTO = userCreateForm.AddressCreateDTO; 
-                userCreateDTO.AvatarCreateDTO = userCreateForm.AvatarCreateDTO;
-                /*
-                foreach (var item in productLineCreateForm.Images)
+                userCreateDTO.Password = userCreateForm.Password;
+
+                using (var ms = new MemoryStream())
                 {
-                    using (var ms = new MemoryStream())
-                    {
-                        await item.CopyToAsync(ms);
-                        var content = ms.ToArray();
-                        var productImage = new ImageCreateDTO { Data = content };
-                        productLineCreateDTO.ImageCreateDTOs.Add(productImage);
-                    }
+                    await userCreateForm.Avatar!.CopyToAsync(ms);
+                    var content = ms.ToArray();
+                    var userAvatar = new AvatarCreateDTO { Data = content };
+                    userCreateDTO.AvatarCreateDTO.Data = userAvatar.Data;
                 }
-                */
+                userCreateDTO.AddressCreateDTO.HouseNumber = userCreateForm.HouseNumber;
+                userCreateDTO.AddressCreateDTO.Street = userCreateForm.Street;
+                userCreateDTO.AddressCreateDTO.PostCode = userCreateForm.PostCode;
+                userCreateDTO.AddressCreateDTO.City = userCreateForm.City;
+                userCreateDTO.AddressCreateDTO.Country = userCreateForm.Country;
+
             }
             return CreatedAtAction(nameof(CreateUserAsync), await _service.CreateOneAsync(userCreateDTO));
         }
@@ -76,8 +79,15 @@ namespace Ecommerce.Controller.src
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public AvatarCreateDTO AvatarCreateDTO { get; set; }
-        public AddressCreateDTO AddressCreateDTO { get; set; }
+        public string Password { get; set; }
+        public IFormFile? Avatar { get; set; }
+        public string HouseNumber { get; set; }
+        public string Street { get; set; }
+        public string PostCode { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        //public AvatarCreateDTO AvatarCreateDTO { get; set; }
+        //public AddressCreateDTO AddressCreateDTO { get; set; }
     }
 
 }
