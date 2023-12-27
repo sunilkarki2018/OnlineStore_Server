@@ -1,6 +1,6 @@
 # Fullstack Project
 ## Introduction
-This is an Ecommerce application design and deployed as a final assignment in Integrify academy. It is built using react in frontend, DotNet core in backend and postgres as database. The primary objective of this project is to develop a robust software application using best practices. 
+This is an Ecommerce application design and deployed as a final assignment in Integrify academy. It is built using react in frontend, DotNet core in backend and postgres as database. The primary objective of this project is to develop a software application that support CRUD operation, authentication and authorization using the best practices. 
 
 ## Table of Contents
 
@@ -42,30 +42,42 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
 ## Architecture
 
-   This project is developed following clean architecture. The architecture ensures system is more scalable for future enhancement and maintainability. It consist of
-   1. WebAPI Layer
-   2. Controller Layer
-   3. Business Layer
-   4. Core Layer
+   This project is developed following clean architecture. It ensures system is more scalable for future enhancement and maintainability. It consist of
+   * WebAPI Layer
+   * Controller Layer
+   * Business Layer
+   * Core Layer
 
 ## ERD Diagram
    ![ERD Diagram](ERDDiagram.png)
 
 ## Features
 
-   1. Create, View, edit and delete Products.
-   2. Create, View, edit and delete Product Lines.
-   2. Manage user and roles.
-   3. Authenticate and Authorize user
-   3. Manage Orders and OrderItems.
-   4. Manage Reviews.
+   * Create, View, edit and delete Products.
+   * Create, View, edit and delete Product Lines.
+   * Manage user and roles.
+   * Authenticate and Authorize user
+   * Manage Orders and OrderItems.
+   * Manage Reviews.
 
 ## Functionalities
 
+   This application has 2 level role for system privelege. Their privelege levels are as follows
+   1. Admin
+      * Create,Delete,Update and Retrieve Products
+      * Create,Delete,Update and Retrieve Product Lines
+      * Create,Delete,Update and Retrieve Categories
+      * Delete,Update and Retrieve Orders
+      * Retrieve Reviews
+      * Create,Delete,Update and Retrieve Users
 
-
-
-
+   2. Customer
+      * Retrieve Products
+      * Retrieve Product Lines
+      * Retrieve Categories
+      * Create Orders
+      * Create and Retrieve Reviews
+      * Create and GetProfile of current User
 
 
 

@@ -28,7 +28,7 @@ namespace Ecommerce.Business.src.DTOs
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        //public AvatarCreateDTO AvatarCreateDTO { get; set; }
+        public AvatarCreateDTO AvatarCreateDTO { get; set; }
         public AddressCreateDTO AddressCreateDTO { get; set; }
     }
     public class PaginatedUserReadDTO
