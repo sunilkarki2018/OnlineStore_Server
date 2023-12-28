@@ -102,7 +102,7 @@ builder.Services.AddSingleton<AdminOrOwnerHandler>();
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
 
-var connectionString = builder.Configuration.GetConnectionString("LocalDb");
+var connectionString = builder.Configuration.GetConnectionString("ElephantDb");
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();
@@ -150,11 +150,14 @@ app.UseCors();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 // Configure the HTTP request pipeline.
+/*
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  
 }
+*/
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseAuthentication();

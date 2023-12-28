@@ -13,7 +13,7 @@ namespace Ecommerce.Business.src.DTOs
     public class OrderCreateDTO
     {
         public OrderStatus OrderStatus { get; set; } = OrderStatus.Registered;
-        public List<OrderItemCreateDTO> orderItemCreateDTOs { get; set; } = new List<OrderItemCreateDTO>();
+        public List<OrderItemCreateDTO> OrderItems { get; set; } = new List<OrderItemCreateDTO>();
     }
     public class OrderUpdateDTO
     {

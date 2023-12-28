@@ -32,10 +32,12 @@ namespace Ecommerce.WebAPI.src.Repository
                         if (product.Inventory < item.Quantity)
                             throw CustomException.ProductNotAvailableException("Enough stock not avaialve to order");
                         product.Inventory = product.Inventory - item.Quantity;
+                        _databaseContext.Entry(product).State = EntityState.Detached;
                         await _productRepo.UpdateOneAsync(product);
-                        item.OrderId = createObject.Id;
-                        await base.CreateOneAsync(createObject);
+
+                        await _databaseContext.SaveChangesAsync();
                     }
+                    await base.CreateOneAsync(createObject);
                     await _databaseContext.SaveChangesAsync();
                     transaction.Commit();
                 }

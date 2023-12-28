@@ -40,7 +40,7 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<Avatar, AvatarReadDTO>();
 
             CreateMap<Order, OrderReadDTO>().ForMember(dest => dest.orderItemReadDTOs, opt => opt.MapFrom(src => src.orderItems));
-            CreateMap<OrderCreateDTO, Order>().ForMember(dest => dest.orderItems, opt => opt.MapFrom(src => src.orderItemCreateDTOs));
+            CreateMap<OrderCreateDTO, Order>().ForMember(dest => dest.orderItems, opt => opt.MapFrom(src => src.OrderItems));
             CreateMap<OrderUpdateDTO, Order>();
 
             CreateMap<OrderItem, OrderItemReadDTO>();
