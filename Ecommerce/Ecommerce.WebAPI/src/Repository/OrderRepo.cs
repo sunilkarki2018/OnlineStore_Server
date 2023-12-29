@@ -49,7 +49,7 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public override async Task<Order?> GetByIdAsync(Guid id)
         {
-            return await _orders.Include(u => u.orderItems).Include(v => v.User).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            return await _orders.Include(u => u.orderItems).ThenInclude(v=>v.Product).ThenInclude(w=>w.ProductLine).Include(v => v.User).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
         public override async Task<IEnumerable<Order>> GetAllAsync(GetAllOptions getAllOptions)
         {
