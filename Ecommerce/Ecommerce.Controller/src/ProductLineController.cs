@@ -18,6 +18,7 @@ namespace Ecommerce.Controller.src
         {
             _productLineService = productLineService; ;
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost()]
         [Consumes("multipart/form-data")]
@@ -44,7 +45,6 @@ namespace Ecommerce.Controller.src
                         var content = ms.ToArray();
                         var productImage = new ImageCreateDTO { Data = content };
                         productLineCreateDTO.ImageCreateDTOs.Add(productImage);
-                        //return BitConverter.ToString(content);
                     }
                 }
             }
@@ -72,6 +72,7 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _productLineService.DeleteOneAsync(id));
         }
+        
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<ProductLineReadDTO>>> GetAllProductLinesAsync([FromQuery] GetAllOptions getAllOptions)
         {
@@ -128,7 +129,6 @@ namespace Ecommerce.Controller.src
         public decimal Price { get; set; }
         public string Description { get; set; }
         public Guid CategoryId { get; set; }
-        //public List<IFormFile> Images { get; set; }
     }
 
 }

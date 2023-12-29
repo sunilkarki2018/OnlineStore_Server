@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Ecommerce.Core.src.Abstractions;
 using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
@@ -19,6 +15,7 @@ namespace Ecommerce.WebAPI.src.Repository
             _databaseContext = databaseContext;
             _data = _databaseContext.Set<T>();
         }
+
         public virtual async Task<T> CreateOneAsync(T createObject)
         {
             await _data.AddAsync(createObject);

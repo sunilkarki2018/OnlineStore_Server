@@ -14,7 +14,6 @@ namespace Ecommerce.WebAPI.src.Repository
         {
             await _data.AddAsync(avatar);
             await _databaseContext.SaveChangesAsync();
-            //return BitConverter.ToString(avatar.Data);
             return avatar.Id.ToString();
         }
 

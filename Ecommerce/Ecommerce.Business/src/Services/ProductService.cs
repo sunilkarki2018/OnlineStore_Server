@@ -35,6 +35,7 @@ namespace Ecommerce.Business.src.Services
                 PageCount = Math.Ceiling((decimal)await _productRepo.GetProductsRecordCountAsync(getAllOptions) / getAllOptions.Limit)
             };
         }
+
         public override async Task<ProductReadDTO> CreateOneAsync(ProductCreateDTO createObject)
         {
             var createdProduct = await _productRepo.CreateOneAsync(_mapper.Map<ProductCreateDTO, Product>(createObject));

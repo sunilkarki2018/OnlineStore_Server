@@ -1,7 +1,6 @@
 using Ecommerce.Core.src.Abstractions;
 using Ecommerce.Core.src.Entities;
 using Ecommerce.WebAPI.src.Database;
-using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.WebAPI.src.Repository
 {

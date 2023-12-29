@@ -42,7 +42,6 @@ namespace Ecommerce.Controller.src
         {
             return await _service.GetAvatarByUserIdAsync(Guid.Parse(userId));
         }
-
     }
 
     public class UserForm

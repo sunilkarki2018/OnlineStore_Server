@@ -16,6 +16,7 @@ namespace Ecommerce.Business.src.Services
         {
             _userRepo = userRepo;
         }
+
         public async Task<bool> UpdatePasswordAsync(string newPassword, Guid userId)
         {
             var user = await _repo.GetByIdAsync(userId);
@@ -28,6 +29,7 @@ namespace Ecommerce.Business.src.Services
             user.Salt = salt;
             return await _repo.UpdateOneAsync(user);
         }
+
         public override async Task<UserReadDTO> CreateOneAsync(UserCreateDTO createObject)
         {
             PasswordService.HashPassword(createObject.Password, out string hashPassword, out byte[] salt);
@@ -40,6 +42,7 @@ namespace Ecommerce.Business.src.Services
             };
             return _mapper.Map<User, UserReadDTO>(await _repo.CreateOneAsync(user));
         }
+
         public override async Task<bool> UpdateOneAsync(Guid id, UserUpdateDTO updateObject)
         {
             var existingUser = await _userRepo.GetByIdAsync(id);
@@ -54,6 +57,7 @@ namespace Ecommerce.Business.src.Services
             };
             return await _repo.UpdateOneAsync(existingUser);
         }
+
         public async Task<PaginatedUserReadDTO> GetAllPaginatedUserDTOAsync(GetAllOptions getAllOptions)
         {
             return new PaginatedUserReadDTO()

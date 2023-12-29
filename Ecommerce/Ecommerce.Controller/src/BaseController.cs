@@ -27,19 +27,19 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _service.DeleteOneAsync(id));
         }
-        //[Authorize(Policy = "SuperAdmin")]
-        //[Authorize(Roles = "Admin")]
+
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<TReadDTO>>> GetAllAsync([FromQuery] GetAllOptions getAllOptions)
         {
             return Ok(await _service.GetAllAsync(getAllOptions));
         }
+
         [HttpGet("{id:guid}")]
         public virtual async Task<ActionResult<TReadDTO>> GetByIdAsync([FromRoute] Guid id)
         {
             return Ok(await _service.GetByIdAsync(id));
         }
-        //[Authorize(Roles = "Admin")]
+
         [HttpPatch("{id:guid}")]
         public virtual async Task<ActionResult<bool>> UpdateOneAsync([FromRoute] Guid id, [FromBody] TUpdateDTO updateObject)
         {

@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
-using Ecommerce.Business.src.Services;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
@@ -22,12 +16,14 @@ namespace Ecommerce.Controller.src
         {
             _userService = userService;
         }
+
         [Authorize(Roles = "Admin")]
         [HttpGet("paginated-users")]
         public async Task<ActionResult<PaginatedUserReadDTO>> GetPaginatedUsersAsync([FromQuery] GetAllOptions getAllOptions)
         {
             return Ok(await _userService.GetAllPaginatedUserDTOAsync(getAllOptions));
         }
+
         [HttpPost("create-users")]
         [Consumes("multipart/form-data")]
         public new async Task<ActionResult<UserReadDTO>> CreateUserAsync([FromForm] UserCreateForm userCreateForm)
@@ -67,8 +63,8 @@ namespace Ecommerce.Controller.src
         {
             return base.UpdateOneAsync(id, updateObject);
         }
-        [Authorize(Roles = "Admin")]
 
+        [Authorize(Roles = "Admin")]
         public override Task<ActionResult<bool>> DeleteOneAsync([FromRoute] Guid id)
         {
             return base.DeleteOneAsync(id);

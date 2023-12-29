@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Core.src.Shared;
@@ -22,12 +18,14 @@ namespace Ecommerce.Controller.src
             _service = service;
             _userService = userService;
         }
+
         [AllowAnonymous]
         [HttpPost()]
         public async Task<string> Login([FromBody] Credentials credentials)
         {
             return await _service.Login(credentials);
         }
+
         [Authorize]
         [HttpGet("get-profile")]
         public async Task<UserReadDTO?> GetProfile()

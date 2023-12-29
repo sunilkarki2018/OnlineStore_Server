@@ -4,11 +4,6 @@ using Ecommerce.Business.src.DTOs;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Abstractions;
 using Ecommerce.Core.src.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ecommerce.Business.src.Services
 {
@@ -34,6 +29,7 @@ namespace Ecommerce.Business.src.Services
             createdOrderReadDTO.User = await _userService.GetByIdAsync(userId);
             return createdOrderReadDTO;
         }
+
         static int GenerateRandomNumber()
         {
             Random random = new Random();

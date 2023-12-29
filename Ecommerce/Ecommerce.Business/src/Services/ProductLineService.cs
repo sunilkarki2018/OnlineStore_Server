@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
@@ -20,6 +16,7 @@ namespace Ecommerce.Business.src.Services
             _productLineRepo = productLineRepo;
             _mapper = mapper;
         }
+
         public override async Task<bool> UpdateOneAsync(Guid id, ProductLineUpdateDTO updateObject)
         {
             var existingProduct = await _productLineRepo.GetByIdAsync(id);

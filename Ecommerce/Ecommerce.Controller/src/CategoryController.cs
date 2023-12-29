@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Core.src.Entities;
-using Ecommerce.Core.src.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,16 +11,19 @@ namespace Ecommerce.Controller.src
         public CategoryController(ICategoryService service) : base(service)
         {
         }
+
         [Authorize(Roles = "Admin")]
         public override Task<ActionResult<CategoryReadDTO>> CreateOneAsync([FromBody] CategoryCreateDTO createObject)
         {
             return base.CreateOneAsync(createObject);
         }
+
         [Authorize(Roles = "Admin")]
         public override Task<ActionResult<bool>> UpdateOneAsync([FromRoute] Guid id, [FromBody] CategoryUpdateDTO updateObject)
         {
             return base.UpdateOneAsync(id, updateObject);
         }
+
         [Authorize(Roles = "Admin")]
         public override Task<ActionResult<bool>> DeleteOneAsync([FromRoute] Guid id)
         {

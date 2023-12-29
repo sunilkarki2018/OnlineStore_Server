@@ -16,7 +16,7 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<AddressCreateDTO, Address>();
             CreateMap<AddressUpdateDTO, Address>();
 
-             CreateMap<ProductLine, ProductLineReadDTO>().ForMember(dest => dest.ImageReadDTOs, opt => opt.MapFrom(src => src.Images));
+            CreateMap<ProductLine, ProductLineReadDTO>().ForMember(dest => dest.ImageReadDTOs, opt => opt.MapFrom(src => src.Images));
             CreateMap<ProductLineCreateDTO, ProductLine>().ForMember(dest => dest.Images, opt => opt.MapFrom(src => src.ImageCreateDTOs)).ForMember(dest => dest.Category, opt => opt.Ignore());
             CreateMap<ProductLineUpdateDTO, ProductLine>().ForMember(dest => dest.Category, opt => opt.Ignore());
 
@@ -29,7 +29,7 @@ namespace Ecommerce.Business.src.Shared
                 .ForMember(dest => dest.ProductSize, opt => opt.Ignore());
             CreateMap<ProductUpdateDTO, Product>();
 
-              CreateMap<ProductSize, ProductSizeReadDTO>();
+            CreateMap<ProductSize, ProductSizeReadDTO>();
             CreateMap<ProductSizeCreateDTO, ProductSize>();
             CreateMap<ProductSizeUpdateDTO, ProductSize>();
 
@@ -46,39 +46,9 @@ namespace Ecommerce.Business.src.Shared
             CreateMap<OrderItem, OrderItemReadDTO>();
             CreateMap<OrderItemCreateDTO, OrderItem>();
 
-
             CreateMap<Review, ReviewReadDTO>();
             CreateMap<ReviewCreateDTO, Review>();
 
-
-            /*   CreateMap<Product, ProductReadDTO>().ForMember(dest => dest.CategoryName, option => option.MapFrom(src => src.Category.Name));
-              CreateMap<ProductCreateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
-              CreateMap<ProductUpdateDTO, Product>().ForMember(dest => dest.Category, opt => opt.Ignore());
-
-              CreateMap<Category, CategoryReadDTO>();
-              CreateMap<CategoryCreateDTO, Category>();
-              CreateMap<CategoryUpdateDTO, Category>();
-
-              CreateMap<Order, OrderReadDTO>()
-              .ForMember(dest => dest.FirstName, option => option.MapFrom(source => source.User.FirstName))
-              .ForMember(dest => dest.LastName, option => option.MapFrom(source => source.User.LastName))
-              .ForMember(dest => dest.Email, option => option.MapFrom(source => source.User.Email));
-
-              CreateMap<OrderItem, OrderItemReadDTO>();
-
-              CreateMap<OrderCreateDTO, Order>()
-              .ForMember(dest => dest.User, opt => opt.Ignore());
-              CreateMap<OrderUpdateDTO, Order>()
-              .ForMember(dest => dest.OrderDate, opt => opt.Ignore())
-              .ForMember(dest => dest.User, opt => opt.Ignore());
-
-              CreateMap<Review, ReviewReadDTO>()
-               .ForMember(dest => dest.FirstName, option => option.MapFrom(source => source.User.FirstName))
-              .ForMember(dest => dest.LastName, option => option.MapFrom(source => source.User.LastName))
-              .ForMember(dest => dest.ProductName, option => option.MapFrom(source => source.Product.Title));
-              CreateMap<ReviewCreateDTO, Review>()
-               .ForMember(dest => dest.Product, opt => opt.Ignore())
-              .ForMember(dest => dest.User, opt => opt.Ignore()); */
         }
     }
 }
