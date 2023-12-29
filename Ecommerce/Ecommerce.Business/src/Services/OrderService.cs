@@ -16,17 +16,28 @@ namespace Ecommerce.Business.src.Services
     {
         private readonly IMapper _mapper;
         private readonly IOrderRepo _orderRepo;
-        public OrderService(IOrderRepo repo, IMapper mapper) : base(repo, mapper)
+        private readonly IUserService _userService;
+        public OrderService(IOrderRepo repo, IMapper mapper, IUserService userService) : base(repo, mapper)
         {
             _mapper = mapper;
             _orderRepo = repo;
+            _userService = userService;
         }
 
         public async Task<OrderReadDTO> CreateOrderAsync(Guid userId, OrderCreateDTO orderCreateDTO)
         {
             var order = _mapper.Map<OrderCreateDTO, Order>(orderCreateDTO);
             order.UserId = userId;
-            return _mapper.Map<Order, OrderReadDTO>(await _orderRepo.CreateOneAsync(order));
+            order.OrderNumber = GenerateRandomNumber().ToString();
+            var createdOrder = await _orderRepo.CreateOneAsync(order);
+            var createdOrderReadDTO = _mapper.Map<Order, OrderReadDTO>(createdOrder);
+            createdOrderReadDTO.User = await _userService.GetByIdAsync(userId);
+            return createdOrderReadDTO;
+        }
+        static int GenerateRandomNumber()
+        {
+            Random random = new Random();
+            return random.Next(100000, 999999);
         }
 
         public override async Task<bool> UpdateOneAsync(Guid id, OrderUpdateDTO updateObject)

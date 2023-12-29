@@ -56,6 +56,8 @@ namespace Ecommerce.WebAPI.src.Repository
             }
             _data.Update(updateObject);
             await _databaseContext.SaveChangesAsync();
+            _databaseContext.Entry(updateObject).State = EntityState.Detached;
+
             return true;
         }
     }

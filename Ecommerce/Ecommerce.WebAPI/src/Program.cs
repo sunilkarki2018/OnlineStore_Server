@@ -102,7 +102,7 @@ builder.Services.AddSingleton<AdminOrOwnerHandler>();
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
 
-var connectionString = builder.Configuration.GetConnectionString("ElephantDb");
+var connectionString = builder.Configuration.GetConnectionString("LocalDb");
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();

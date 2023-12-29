@@ -10,6 +10,7 @@ namespace Ecommerce.Core.src.Entities
     {
         public OrderStatus OrderStatus { get; set; }
         public Guid UserId { get; set; }
+        public string OrderNumber { get; set; }
         public User User { get; set; }
         public IEnumerable<OrderItem> orderItems { get; set; }
     }
