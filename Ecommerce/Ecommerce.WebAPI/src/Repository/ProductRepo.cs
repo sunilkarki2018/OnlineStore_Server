@@ -14,7 +14,7 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public override async Task<IEnumerable<Product>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            return await _data.Include(u => u.ProductLine).Include(u => u.ProductSize).AsNoTracking().ToArrayAsync();
+            return await _data.Include(u => u.ProductLine).ThenInclude(v=>v.Images).Include(u => u.ProductSize).AsNoTracking().ToArrayAsync();
         }
 
         public override async Task<Product?> GetByIdAsync(Guid id)

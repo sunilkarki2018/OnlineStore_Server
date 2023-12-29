@@ -36,7 +36,6 @@ namespace Ecommerce.Controller.src
             return base.DeleteOneAsync(id);
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet("paginated-products")]
         public async Task<ActionResult<PaginatedProductReadDTO>> GetPaginatedProductsAsync([FromQuery] GetAllOptions getAllOptions)
         {

@@ -17,7 +17,7 @@ namespace Ecommerce.Controller.src
             _authorizationService = authorizationService;
         }
 
-        [Authorize(Roles = "Customer")]
+        [Authorize()]
         public override async Task<ActionResult<OrderReadDTO>> CreateOneAsync([FromBody] OrderCreateDTO createObject)
         {
             var authenticatedClaims = HttpContext.User;

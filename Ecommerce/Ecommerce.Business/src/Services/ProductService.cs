@@ -36,12 +36,35 @@ namespace Ecommerce.Business.src.Services
             };
         }
 
+        public override async Task<IEnumerable<ProductReadDTO>> GetAllAsync(GetAllOptions getAllOptions)
+        {
+            return ConvertImageDataToBase64((_mapper.Map<IEnumerable<Product>, IEnumerable<ProductReadDTO>>(await _productRepo.GetAllAsync(getAllOptions))).ToList());
+        }
+
+        private List<ProductReadDTO> ConvertImageDataToBase64(List<ProductReadDTO> products)
+        {
+            foreach (var product in products)
+            {
+                if (product.ProductLine!.ImageReadDTOs != null)
+                {
+                    foreach (var imageReadDto in product.ProductLine.ImageReadDTOs)
+                    {
+                        if (imageReadDto.Data != null)
+                        {
+                            imageReadDto.ImgBase64Data = Convert.ToBase64String(imageReadDto.Data);
+                        }
+                    }
+                }
+            }
+            return products;
+        }
+
         public override async Task<ProductReadDTO> CreateOneAsync(ProductCreateDTO createObject)
         {
             var createdProduct = await _productRepo.CreateOneAsync(_mapper.Map<ProductCreateDTO, Product>(createObject));
             var productReadDTO = _mapper.Map<Product, ProductReadDTO>(createdProduct);
             productReadDTO.ProductLine = await _productLineService.GetByIdAsync(productReadDTO.ProductLineId);
-            
+
             productReadDTO.ProductSize = await _productSizeService.GetByIdAsync(productReadDTO.ProductSizeId.Value);
             return productReadDTO;
         }
