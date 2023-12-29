@@ -1,13 +1,14 @@
-﻿using Ecommerce.Core.src.Entities;
+﻿using Ecommerce.Business.src.DTOs;
+using Ecommerce.Core.src.Entities;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
 namespace Ecommerce.WebAPI.src.Authorization
 {
     public class AdminOrOwnerHandler :
-   AuthorizationHandler<AdminOrOwnerRequirement, Order>
+   AuthorizationHandler<AdminOrOwnerRequirement, OrderReadDTO>
     {
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdminOrOwnerRequirement requirement, Order orderResource)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, AdminOrOwnerRequirement requirement, OrderReadDTO? orderResource)
         {
             var user = context.User;
             var userRole = user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)!.Value;

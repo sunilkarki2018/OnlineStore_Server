@@ -51,7 +51,6 @@ namespace Ecommerce.Controller.src
 
 
         }
-        [Authorize(Roles = "Admin")]
         public override async Task<ActionResult<bool>> DeleteOneAsync([FromRoute] Guid id)
         {
             var order = await _orderService.GetByIdAsync(id);

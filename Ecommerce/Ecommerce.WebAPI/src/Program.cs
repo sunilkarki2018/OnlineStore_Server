@@ -12,6 +12,7 @@ using Ecommerce.WebAPI.src.Middleware;
 using Ecommerce.WebAPI.src.Repository;
 using Ecommerce.WebAPI.src.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -94,9 +95,6 @@ builder.Services.AddScoped<IUserService, UserService>()
 // builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 
-//AUthorization handler
-builder.Services.AddSingleton<AdminOrOwnerHandler>();
-
 // Error handler middleware
 // builder.Services.AddScoped<ExceptionHandlerMiddleware>();
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
@@ -142,6 +140,9 @@ builder.Services.AddAuthorization(policy =>
     policy.AddPolicy("Customer", policy => policy.RequireRole(ClaimTypes.Role, "Customer"));
     policy.AddPolicy("AdminOrOwner", policy => policy.Requirements.Add(new AdminOrOwnerRequirement()));
 });
+
+//AUthorization handler
+builder.Services.AddSingleton<IAuthorizationHandler, AdminOrOwnerHandler>();
 
 var app = builder.Build();
 
