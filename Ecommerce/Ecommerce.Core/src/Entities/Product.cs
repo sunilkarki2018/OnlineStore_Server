@@ -13,7 +13,7 @@ namespace Ecommerce.Core.src.Entities
     }
     public class ProductSize : BaseEntity
     {
-        public int Value { get; set; }
+        public string Value { get; set; }
         [JsonIgnore]
         public IEnumerable<Product> Products { get; set; }
     }

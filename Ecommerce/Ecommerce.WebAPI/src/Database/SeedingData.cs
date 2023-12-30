@@ -8,12 +8,10 @@ namespace Ecommerce.WebAPI.src.Database
         private static Guid productSize1 = Guid.NewGuid();
         private static Guid productSize2 = Guid.NewGuid();
         private static Guid productSize3 = Guid.NewGuid();
-        private static Guid productSize4 = Guid.NewGuid();
 
-        private static ProductSize size1 = new ProductSize { Id = productSize1, Value = 32 };
-        private static ProductSize size2 = new ProductSize { Id = productSize2, Value = 34 };
-        private static ProductSize size3 = new ProductSize { Id = productSize3, Value = 36 };
-        private static ProductSize size4 = new ProductSize { Id = productSize4, Value = 38 };
+        private static ProductSize size1 = new ProductSize { Id = productSize1, Value = "S" };
+        private static ProductSize size2 = new ProductSize { Id = productSize2, Value = "M" };
+        private static ProductSize size3 = new ProductSize { Id = productSize3, Value = "L" };
 
         private static Guid categoryGuid1 = Guid.NewGuid();
         private static Guid categoryGuid2 = Guid.NewGuid();
@@ -139,70 +137,71 @@ namespace Ecommerce.WebAPI.src.Database
             ProductLineId = productLineGuid1,
             ProductSizeId = productSize3
         };
-        private static Product product4 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 100,
-            ProductLineId = productLineGuid1,
-            ProductSizeId = productSize4
-        };
 
-        private static Product product5 = new Product
+        private static Product product4 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 100,
             ProductLineId = productLineGuid2,
             ProductSizeId = productSize1
+        };
+        private static Product product5 = new Product
+        {
+            Id = Guid.NewGuid(),
+            Inventory = 200,
+            ProductLineId = productLineGuid2,
+            ProductSizeId = productSize2
         };
         private static Product product6 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 200,
             ProductLineId = productLineGuid2,
-            ProductSizeId = productSize2
-        };
-        private static Product product7 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 200,
-            ProductLineId = productLineGuid2,
             ProductSizeId = productSize3
         };
-        private static Product product8 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 100,
-            ProductLineId = productLineGuid2,
-            ProductSizeId = productSize4
-        };
 
-        private static Product product9 = new Product
+        private static Product product7 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 100,
             ProductLineId = productLineGuid3,
             ProductSizeId = productSize1
         };
-        private static Product product10 = new Product
+        private static Product product8 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 200,
             ProductLineId = productLineGuid3,
             ProductSizeId = productSize2
         };
-        private static Product product11 = new Product
+        private static Product product9 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 200,
             ProductLineId = productLineGuid3,
             ProductSizeId = productSize3
         };
-        private static Product product12 = new Product
+
+        private static Product product10 = new Product
         {
             Id = Guid.NewGuid(),
             Inventory = 100,
-            ProductLineId = productLineGuid3,
-            ProductSizeId = productSize4
+            ProductLineId = productLineGuid4,
+            ProductSizeId = productSize1
+        };
+        private static Product product11 = new Product
+        {
+            Id = Guid.NewGuid(),
+            Inventory = 200,
+            ProductLineId = productLineGuid4,
+            ProductSizeId = productSize2
+        };
+        private static Product product12 = new Product
+        {
+            Id = Guid.NewGuid(),
+            Inventory = 200,
+            ProductLineId = productLineGuid4,
+            ProductSizeId = productSize3
         };
 
         private static Product product13 = new Product
@@ -225,42 +224,6 @@ namespace Ecommerce.WebAPI.src.Database
             Inventory = 200,
             ProductLineId = productLineGuid4,
             ProductSizeId = productSize3
-        };
-        private static Product product16 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 100,
-            ProductLineId = productLineGuid4,
-            ProductSizeId = productSize4
-        };
-
-        private static Product product17 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 100,
-            ProductLineId = productLineGuid4,
-            ProductSizeId = productSize1
-        };
-        private static Product product18 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 200,
-            ProductLineId = productLineGuid4,
-            ProductSizeId = productSize2
-        };
-        private static Product product19 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 200,
-            ProductLineId = productLineGuid4,
-            ProductSizeId = productSize3
-        };
-        private static Product product20 = new Product
-        {
-            Id = Guid.NewGuid(),
-            Inventory = 100,
-            ProductLineId = productLineGuid4,
-            ProductSizeId = productSize4
         };
 
         private static Guid adminGuid1 = Guid.NewGuid();
@@ -361,7 +324,7 @@ namespace Ecommerce.WebAPI.src.Database
         }
         public static List<ProductSize> GetProductSizes()
         {
-            return new List<ProductSize>() { size1, size2, size3, size4 };
+            return new List<ProductSize>() { size1, size2, size3 };
         }
 
         public static List<Image> GetImages()
@@ -376,7 +339,7 @@ namespace Ecommerce.WebAPI.src.Database
 
         public static List<Product> GetProducts()
         {
-            return new List<Product>() { product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11, product12, product13, product14, product15, product16, product17, product18, product19, product20 };
+            return new List<Product>() { product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11, product12, product13, product14, product15 };
         }
 
     }
