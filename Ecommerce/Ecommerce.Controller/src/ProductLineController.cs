@@ -19,6 +19,7 @@ namespace Ecommerce.Controller.src
             _productLineService = productLineService; ;
         }
 
+        /*
         [Authorize(Roles = "Admin")]
         [HttpPost()]
         [Consumes("multipart/form-data")]
@@ -50,6 +51,47 @@ namespace Ecommerce.Controller.src
             }
             return CreatedAtAction(nameof(CreateProductLineAsync), await _productLineService.CreateOneAsync(productLineCreateDTO));
         }
+*/
+
+
+
+
+        [Authorize(Roles = "Admin")]
+        [HttpPatch()]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<bool>> UpdateProductLineAsync(Guid id, [FromForm] ProductLineUpdateForm productLineUpdateForm)
+        {
+            var productLineUpdateDTO = new ProductLineUpdateDTO();
+            productLineUpdateDTO.Id = productLineUpdateForm.Id;
+            productLineUpdateDTO.Title = productLineUpdateForm.Title;
+            productLineUpdateDTO.Price = productLineUpdateForm.Price;
+            productLineUpdateDTO.Description = productLineUpdateForm.Description;
+            productLineUpdateDTO.CategoryId = productLineUpdateForm.CategoryId;
+
+            if (productLineUpdateForm.Images != null || productLineUpdateForm.Images.Count != 0)
+            {
+                foreach (var item in productLineUpdateForm.Images)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+                        await item.CopyToAsync(ms);
+                        var content = ms.ToArray();
+                        var productImage = new ImageUpdateDTO { Data = content, ProductLineId = id };
+                        productLineUpdateDTO.Images.Add(productImage);
+                    }
+                }
+            }
+            return CreatedAtAction(nameof(UpdateProductLineAsync), await _productLineService.UpdateOneAsync(productLineUpdateDTO.Id, productLineUpdateDTO));
+        }
+
+
+
+
+
+
+
+
+
 
         [Authorize(Roles = "Admin")]
         [HttpPatch("{id:guid}")]
@@ -72,7 +114,7 @@ namespace Ecommerce.Controller.src
         {
             return Ok(await _productLineService.DeleteOneAsync(id));
         }
-        
+
         [HttpGet()]
         public virtual async Task<ActionResult<IEnumerable<ProductLineReadDTO>>> GetAllProductLinesAsync([FromQuery] GetAllOptions getAllOptions)
         {
@@ -129,6 +171,7 @@ namespace Ecommerce.Controller.src
         public decimal Price { get; set; }
         public string Description { get; set; }
         public Guid CategoryId { get; set; }
+        public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
     }
 
 }

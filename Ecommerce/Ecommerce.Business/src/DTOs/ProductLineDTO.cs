@@ -29,7 +29,6 @@ namespace Ecommerce.Business.src.DTOs
         public string Description { get; set; }
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
-        //public Category Category { get; set; }
-        //public List<ImageUpdateDTO> ImageUpdateDTOs { get; set; } = new List<ImageUpdateDTO>();
+        public List<ImageUpdateDTO> Images { get; set; } = new List<ImageUpdateDTO>();
     }
 }

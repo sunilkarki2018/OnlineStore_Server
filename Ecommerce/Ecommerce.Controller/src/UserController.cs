@@ -76,6 +76,15 @@ namespace Ecommerce.Controller.src
             var result = ConvertImageDataToBase64(userReadDTOs.ToList());
             return Ok(result);
         }
+        public override async Task<ActionResult<UserReadDTO>> GetByIdAsync([FromRoute] Guid id)
+        {
+            var userReadDTO = await _userService.GetByIdAsync(id);
+            if (userReadDTO?.Avatar != null)
+            {
+                userReadDTO.Avatar.AvatarBase64Value = Convert.ToBase64String(userReadDTO.Avatar.Data);
+            }
+            return Ok(userReadDTO);
+        }
 
         private List<UserReadDTO> ConvertImageDataToBase64(List<UserReadDTO> userReadDTOs)
         {
@@ -91,8 +100,6 @@ namespace Ecommerce.Controller.src
             }
             return userReadDTOs;
         }
-
-
     }
     public class UserCreateForm
     {

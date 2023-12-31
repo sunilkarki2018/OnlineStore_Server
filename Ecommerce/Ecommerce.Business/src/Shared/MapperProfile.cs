@@ -35,6 +35,7 @@ namespace Ecommerce.Business.src.Shared
 
             CreateMap<ImageCreateDTO, Image>();
             CreateMap<Image, ImageReadDTO>();
+            CreateMap<ImageUpdateDTO, Image>();
 
             CreateMap<AvatarCreateDTO, Avatar>();
             CreateMap<Avatar, AvatarReadDTO>();

@@ -8,6 +8,6 @@ namespace Ecommerce.Core.src.Abstractions
 {
     public interface IProductLineRepo: IBaseRepo<ProductLine>
     {
-        
+        Task<bool> UpdateProductLineWithImagesAsync(ProductLine updateObject);
     }
 }

@@ -13,6 +13,7 @@ namespace Ecommerce.WebAPI.src.Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        //public DbSet<Image> Images { get; set; }
         static DatabaseContext()
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -25,16 +26,6 @@ namespace Ecommerce.WebAPI.src.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            /*
-            var builder = new NpgsqlDataSourceBuilder(_config.GetConnectionString("ElephantDb"));
-            builder.MapEnum<Role>();
-            builder.MapEnum<OrderStatus>();
-            optionsBuilder.UseNpgsql(builder.Build())
-                .UseSnakeCaseNamingConvention()
-                   .AddInterceptors(new TimeStampInterceptor())
-                   .EnableSensitiveDataLogging()
-                   .EnableDetailedErrors();
-            */
             base.OnConfiguring(optionsBuilder);
         }
 

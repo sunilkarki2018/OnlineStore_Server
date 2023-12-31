@@ -25,7 +25,7 @@ namespace Ecommerce.Business.src.Services
                 throw CustomException.NotFoundException("ProductLine not found");
             }
             _mapper.Map<ProductLineUpdateDTO, ProductLine>(updateObject, existingProduct);
-            return await _productLineRepo.UpdateOneAsync(existingProduct);
+            return await _productLineRepo.UpdateProductLineWithImagesAsync(existingProduct);
         }
     }
 }
