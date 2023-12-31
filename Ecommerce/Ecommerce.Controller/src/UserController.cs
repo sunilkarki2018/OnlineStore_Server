@@ -1,5 +1,6 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
+using Ecommerce.Business.src.Services;
 using Ecommerce.Business.src.Shared;
 using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
@@ -46,13 +47,13 @@ namespace Ecommerce.Controller.src
                     await userCreateForm.Avatar!.CopyToAsync(ms);
                     var content = ms.ToArray();
                     var userAvatar = new AvatarCreateDTO { Data = content };
-                    userCreateDTO.AvatarCreateDTO.Data = userAvatar.Data;
+                    userCreateDTO.Avatar.Data = userAvatar.Data;
                 }
-                userCreateDTO.AddressCreateDTO.HouseNumber = userCreateForm.HouseNumber;
-                userCreateDTO.AddressCreateDTO.Street = userCreateForm.Street;
-                userCreateDTO.AddressCreateDTO.PostCode = userCreateForm.PostCode;
-                userCreateDTO.AddressCreateDTO.City = userCreateForm.City;
-                userCreateDTO.AddressCreateDTO.Country = userCreateForm.Country;
+                userCreateDTO.Address.HouseNumber = userCreateForm.HouseNumber;
+                userCreateDTO.Address.Street = userCreateForm.Street;
+                userCreateDTO.Address.PostCode = userCreateForm.PostCode;
+                userCreateDTO.Address.City = userCreateForm.City;
+                userCreateDTO.Address.Country = userCreateForm.Country;
 
             }
             return CreatedAtAction(nameof(CreateUserAsync), await _userService.CreateOneAsync(userCreateDTO));
@@ -69,6 +70,29 @@ namespace Ecommerce.Controller.src
         {
             return base.DeleteOneAsync(id);
         }
+        public override async Task<ActionResult<IEnumerable<UserReadDTO>>> GetAllAsync([FromQuery] GetAllOptions getAllOptions)
+        {
+            var userReadDTOs = await _userService.GetAllAsync(getAllOptions);
+            var result = ConvertImageDataToBase64(userReadDTOs.ToList());
+            return Ok(result);
+        }
+
+        private List<UserReadDTO> ConvertImageDataToBase64(List<UserReadDTO> userReadDTOs)
+        {
+            foreach (var userReadDTO in userReadDTOs)
+            {
+                if (userReadDTO.Avatar != null)
+                {
+                    if (userReadDTO.Avatar.Data != null)
+                    {
+                        userReadDTO.Avatar.AvatarBase64Value = Convert.ToBase64String(userReadDTO.Avatar.Data);
+                    }
+                }
+            }
+            return userReadDTOs;
+        }
+
+
     }
     public class UserCreateForm
     {

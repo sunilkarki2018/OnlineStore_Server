@@ -67,7 +67,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
       * Create,Delete,Update and Retrieve Products
       * Create,Delete,Update and Retrieve Product Lines
       * Create,Delete,Update and Retrieve Categories
-      * Delete,Update and Retrieve Orders
+      * Create,Delete,Update and Retrieve Orders
       * Retrieve Reviews
       * Create,Delete,Update and Retrieve Users
 
@@ -78,13 +78,6 @@ This is an Ecommerce application design and deployed as a final assignment in In
       * Create Orders
       * Create and Retrieve Reviews
       * Create and GetProfile of current User
-
-
-
-
-Generate a solution file inside this repository. All the project layers of backend server should be added into this solution.
-
-
 
 
 

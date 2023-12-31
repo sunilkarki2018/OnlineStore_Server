@@ -7,9 +7,9 @@ namespace Ecommerce.Business.src.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public Avatar Avatar { get; set; }
+        public AvatarReadDTO Avatar { get; set; }
         public Role Role { get; set; }
-        public AddressReadDTO AddressReadDTO { get; set; }
+        public AddressReadDTO Address { get; set; }
     }
 
     public class UserUpdateDTO : BaseEntityDTO
@@ -17,9 +17,9 @@ namespace Ecommerce.Business.src.DTOs
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public AvatarUpdateDTO AvatarUpdateDTO { get; set; }
+        public AvatarUpdateDTO Avatar { get; set; }
         public Role Role { get; set; }
-        public AddressUpdateDTO AddressUpdateDTO { get; set; }
+        public AddressUpdateDTO Address { get; set; }
     }
 
     public class UserCreateDTO
@@ -28,8 +28,8 @@ namespace Ecommerce.Business.src.DTOs
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public AvatarCreateDTO AvatarCreateDTO { get; set; }=new AvatarCreateDTO();
-        public AddressCreateDTO AddressCreateDTO { get; set; }= new AddressCreateDTO();
+        public AvatarCreateDTO Avatar { get; set; }=new AvatarCreateDTO();
+        public AddressCreateDTO Address { get; set; }= new AddressCreateDTO();
     }
     public class PaginatedUserReadDTO
     {

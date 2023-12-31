@@ -8,9 +8,9 @@ namespace Ecommerce.Business.src.Shared
     {
         public MapperProfile()
         {
-            CreateMap<User, UserReadDTO>().ForMember(dest => dest.AddressReadDTO, opt => opt.MapFrom(src => src.Address));
-            CreateMap<UserCreateDTO, User>().ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.AddressCreateDTO));
-            CreateMap<UserUpdateDTO, User>().ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.AddressUpdateDTO));
+            CreateMap<User, UserReadDTO>().ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
+            CreateMap<UserCreateDTO, User>().ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
+            CreateMap<UserUpdateDTO, User>().ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address));
 
             CreateMap<Address, AddressReadDTO>();
             CreateMap<AddressCreateDTO, Address>();
