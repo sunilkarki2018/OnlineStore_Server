@@ -45,9 +45,9 @@ namespace Ecommerce.Business.src.Services
         {
             foreach (var product in products)
             {
-                if (product.ProductLine!.ImageReadDTOs != null)
+                if (product.ProductLine!.Images != null)
                 {
-                    foreach (var imageReadDto in product.ProductLine.ImageReadDTOs)
+                    foreach (var imageReadDto in product.ProductLine.Images)
                     {
                         if (imageReadDto.Data != null)
                         {

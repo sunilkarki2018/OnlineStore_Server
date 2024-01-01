@@ -57,7 +57,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
    * Create, View, edit and delete Product Lines.
    * Manage user and roles.
    * Authenticate and Authorize user
-   * Manage Orders and OrderItems.
+   * Create Orders and OrderItems.
    * Manage Reviews.
 
 ## Functionalities

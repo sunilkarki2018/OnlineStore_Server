@@ -40,6 +40,10 @@ namespace Ecommerce.WebAPI.src.Repository
                         {
                             _databaseContext.Entry(product.ProductSize).State = EntityState.Detached;
                         }
+                        if (product.ProductLine != null)
+                        {
+                            _databaseContext.Entry(product.Prod).State = EntityState.Detached;
+                        }
                     }
                     await base.CreateOneAsync(createObject);
                     await _databaseContext.SaveChangesAsync();
@@ -48,6 +52,7 @@ namespace Ecommerce.WebAPI.src.Repository
                 catch (Exception ex)
                 {
                     transaction.Rollback();
+                    throw new Exception("Error while processing order");
                 }
             }
             return createObject;

@@ -127,9 +127,9 @@ namespace Ecommerce.Controller.src
         {
             foreach (var productLine in productLines)
             {
-                if (productLine.ImageReadDTOs != null)
+                if (productLine.Images != null)
                 {
-                    foreach (var imageReadDto in productLine.ImageReadDTOs)
+                    foreach (var imageReadDto in productLine.Images)
                     {
                         if (imageReadDto.Data != null)
                         {
@@ -145,7 +145,7 @@ namespace Ecommerce.Controller.src
         public virtual async Task<ActionResult<ProductLineReadDTO>> GetProductLinesByIdAsync([FromRoute] Guid id)
         {
             var productLineDTO = await _productLineService.GetByIdAsync(id);
-            foreach (var imageReadDto in productLineDTO.ImageReadDTOs)
+            foreach (var imageReadDto in productLineDTO.Images)
             {
                 if (imageReadDto.Data != null)
                 {
