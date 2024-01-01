@@ -104,7 +104,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
       To start the project first clone the project from the repository and install DotNet SDK 8.
 
-      1. git clone https://github.com/sunilkarki2018/EcommerceApp.git
+      1. git clone https://github.com/sunilkarki2018/fs16_CSharp-FullStack
       2. git checkout develop
       3. cd Ecommerce.WebApi
       4. DotNet run
@@ -113,7 +113,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
     
     To setup fresh database run following commands
 
-    1. dotnet ef migrations add MigrationName
+    1. dotnet ef migrations add InitialMigration
     2. dotnet ef database update
     3. dotnet ef database drop (if needed)
 
@@ -121,6 +121,14 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
    ## Application Link
    https://bucolic-semifreddo-2378d4.netlify.app/
+
+   Admin Credentials
+   Username: admin@mail.com
+   Password: admin123
+
+   Customer Crendentials
+   User: customer@mail.com
+   Password: customer123
 
    ## Swagger Link
    https://ecommerce2024v1.azurewebsites.net/swagger/index.html
