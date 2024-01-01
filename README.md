@@ -6,12 +6,13 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
 1. [Technologies](#technologies)
 2. [File Structure](#filestructure)
-2. [Achitecture](#architecture)
-2. [Features](#features)
-2. [Functionalities](#functionalities)
-3. [Requirements](#requirements)
-4. [Getting Started](#getting-started)
-5. [Testing](#testing)
+3. [Application Module Overview](#overview)
+4. [Features](#features)
+5. [Functionalities by ROle](#functionalities)
+6. [Requirements](#requirements)
+7. [Getting Started](#getting-started)
+8. [DeploymentLink](#deployment)
+9. [Testing](#testing)
 
 ## Technologies
 
@@ -51,6 +52,14 @@ This is an Ecommerce application design and deployed as a final assignment in In
 ## ERD Diagram
    ![ERD Diagram](ERDDiagram.png)
 
+## Application Module Overview
+ 
+   Functionalities available for each module is illustrated in the following diagrams
+
+   ![Alt text](Images/ModuleFunctionality1.png)
+
+   ![Alt text](Images/ModuleFunctionality2.png)
+
 ## Features
 
    * Create, View, edit and delete Products.
@@ -60,134 +69,63 @@ This is an Ecommerce application design and deployed as a final assignment in In
    * Create Orders and OrderItems.
    * Manage Reviews.
 
-## Functionalities
+## Functionalities by Role
 
    This application has 2 level role for system privelege. Their privelege levels are as follows
    1. Admin
-      * Create,Delete,Update and Retrieve Products
       * Create,Delete,Update and Retrieve Product Lines
+      * Create,Delete and Retrieve Products
       * Create,Delete,Update and Retrieve Categories
       * Create,Delete,Update and Retrieve Orders
-      * Retrieve Reviews
+      * Retrieve Reviews(API only)
       * Create,Delete,Update and Retrieve Users
 
    2. Customer
-      * Retrieve Products
       * Retrieve Product Lines
+      * Retrieve Products
       * Retrieve Categories
       * Create Orders
-      * Create and Retrieve Reviews
+      * Create and Retrieve Reviews(API only)
       * Create and GetProfile of current User
-
-
-
-
-
-
-![TypeScript](https://img.shields.io/badge/TypeScript-v.4-green)
-![SASS](https://img.shields.io/badge/SASS-v.4-hotpink)
-![React](https://img.shields.io/badge/React-v.18-blue)
-![Redux toolkit](https://img.shields.io/badge/Redux-v.1.9-brown)
-![.NET Core](https://img.shields.io/badge/.NET%20Core-v.7-purple)
-![EF Core](https://img.shields.io/badge/EF%20Core-v.7-cyan)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-v.14-drakblue)
-
-This project involves creating a Fullstack project with React and Redux in the frontend and ASP.NET Core 7 in the backend. The goal is to provide a seamless experience for users, along with robust management system for administrators.
-
-- Frontend: SASS, TypeScript, React, Redux Toolkit
-- Backend: ASP.NET Core, Entity Framework Core, PostgreSQL
-
-You can follow the same topics as your backend project or choose the alternative one, between E-commerce and Library. You can reuse the previous frontend project, with necessary modification to fit your backend server.
-
-## Table of Contents
-
-1. [Instruction](#instruction)
-2. [Features](#features)
-   - [Mandatory features](#mandatory-features)
-   - [Extra features](#extra-features)
-3. [Requirements](#requirements)
-4. [Getting Started](#getting-started)
-5. [Testing](#testing)
-
-## Instruction
-
-This repository should be used only for backend server. The frontend server should be done in a separate repository [here](https://github.com/Integrify-Finland/fs16_6-frontend-project). You can modify your previous frontend project and instructors will check the submissions (pull requests) in the frontend project repository. The modified frontend server need to be connected with this backend server to make a whole fullstack project.
-
-### Frontend
-
-If you only modify the previoud frontend project, you can work on the same repository and there is no need to open new pull request. However, you can get back to your previous pull request and remove all the labels. In case you want to make new project from scratch, you can fork and clone the original repository and open new pullrequest for your new frontend.
-
-### Backend
-
-Generate a solution file inside this repository. All the project layers of backend server should be added into this solution.
-
-## Features
-
-### Mandatory features
-
-#### User Functionalities
-
-1. User Management: Users should be able to register for an user account and log in. Users cannot register themselves as admin.
-2. Browse Products: Users should be able to view all available products and single product, search and sort products.
-3. Add to Cart: Users should be able to add products to a shopping cart, and manage cart.
-4. Checkout: Users should be able to place orders.
-
-#### Admin Functionalities
-
-1. User Management: Admins should be able to view and delete users.
-2. Product Management: Admins should be able to view, edit, delete and add new products.
-3. Order Management: Admins should be able to view all orders.
-
-### Extra features
-
-#### User Functionalities
-
-1. User Management: Users should be able to view and edit only certain properties in their accounts. They also can unregister their own accounts.
-2. Authentication and account registration with Google Oauth.
-3. Order Management: Users should be able to view their order history, track the status of their orders, and potentially cancel orders within a certain timeframe.
-
-#### Admin Functionalities
-
-1. User Management: Admins should be able to edit users' role and create new users and admins.
-2. Order Management: Admins should be able to update order status, view order details, and cancel orders.
-
-And any other extra features that you want to implement (like file upload, reviews, payment, email, etc.).
-
-## Requirements
-
-1. Apply CLEAN architecture in your backend. In README file, explain the architecture of your project as well.
-2. Error handler: This will ensure any exceptions thrown in your application are handled appropriately and helpful error messages are returned.
-3. In backend server, unit testing (xunit) should be done, at least for Service(Use case) layer. We recommend to test entities, repositories and controllers as well.
-4. Document with Swagger: Make sure to annotate your API endpoints and generate a Swagger UI for easier testing and documentation.
-5. Project should have proper file structure, naming convention, and comply with Rest API.
-6. `README` file should sufficiently describe the project, as well as the deployment, link to frontend github as well.
-7. Frontend, backend, and database servers need to be available in the live servers.  
 
 ## Getting Started
 
-1. Start with backend first before moving to frontend.
-2. In the backend, here is the recommended order:
+   ### Frontend Setup
 
-   - Plan Your Database Schema before start coding
+      To start the project first clone the project from the repository and run the node commands.
 
-   - Set Up the Project Structure
+      1. git clone https://github.com/sunilkarki2018/EcommerceApp.git
+      2 . cd fs16_6-frontend-project
+      3. git checkout develop
+      4. npm install
+      5. npm start
 
-   - Build the models
+   ### Backend Setup
 
-   - Create the Repositories
+      To start the project first clone the project from the repository and install DotNet SDK 8.
 
-   - Build the Services
+      1. git clone https://github.com/sunilkarki2018/EcommerceApp.git
+      2. git checkout develop
+      3. cd Ecommerce.WebApi
+      4. DotNet run
 
-   - Set Up Authentication & Authorization
+   ### Database Setup
+    
+    To setup fresh database run following commands
 
-   - Build the Controllers
+    1. dotnet ef migrations add MigrationName
+    2. dotnet ef database update
+    3. dotnet ef database drop (if needed)
 
-   - Implement Error Handling Middleware
+## Deplyoment Link
 
-3. You should focus on the mandatory features first. Make sure you have minimal working project before opting for advanced functionalities.
+   ## Application Link
+   https://bucolic-semifreddo-2378d4.netlify.app/
 
-Testing should be done along the development circle, early and regularly.
+   ## Swagger Link
+   https://ecommerce2024v1.azurewebsites.net/swagger/index.html
 
 ## Testing
 
-Unit testing, and optionally integration testing, must be included for both frontend and backend code. Aim for high test coverage and ensure all major functionalities are covered.
+To run test: dotnet test
+
