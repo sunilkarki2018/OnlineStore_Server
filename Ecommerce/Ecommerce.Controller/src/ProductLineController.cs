@@ -19,7 +19,6 @@ namespace Ecommerce.Controller.src
             _productLineService = productLineService; ;
         }
 
-        /*
         [Authorize(Roles = "Admin")]
         [HttpPost()]
         [Consumes("multipart/form-data")]
@@ -45,13 +44,12 @@ namespace Ecommerce.Controller.src
                         await item.CopyToAsync(ms);
                         var content = ms.ToArray();
                         var productImage = new ImageCreateDTO { Data = content };
-                        productLineCreateDTO.ImageCreateDTOs.Add(productImage);
+                        productLineCreateDTO.Images.Add(productImage);
                     }
                 }
             }
             return CreatedAtAction(nameof(CreateProductLineAsync), await _productLineService.CreateOneAsync(productLineCreateDTO));
         }
-*/
 
 
 
@@ -85,28 +83,6 @@ namespace Ecommerce.Controller.src
         }
 
 
-
-
-
-
-
-
-
-
-        [Authorize(Roles = "Admin")]
-        [HttpPatch("{id:guid}")]
-        public async Task<ActionResult<bool>> UpdateProductLineAsync([FromBody] ProductLineUpdateForm productLineUpdateForm)
-        {
-            var productLineUpdateDTO = new ProductLineUpdateDTO();
-
-            productLineUpdateDTO.Id = productLineUpdateForm.Id;
-            productLineUpdateDTO.Title = productLineUpdateForm.Title;
-            productLineUpdateDTO.Price = productLineUpdateForm.Price;
-            productLineUpdateDTO.Description = productLineUpdateForm.Description;
-            productLineUpdateDTO.CategoryId = productLineUpdateForm.CategoryId;
-
-            return Ok(await _productLineService.UpdateOneAsync(productLineUpdateForm.Id, productLineUpdateDTO));
-        }
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id:guid}")]
