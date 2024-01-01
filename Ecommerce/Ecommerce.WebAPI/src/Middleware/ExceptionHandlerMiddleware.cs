@@ -8,7 +8,7 @@ namespace Ecommerce.WebAPI.src.Middleware
         {
             try
             {
-                await next(context); // to pass the question to the next handler
+                await next(context);
             }
             catch (CustomException e)
             {

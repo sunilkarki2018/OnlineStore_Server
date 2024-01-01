@@ -42,7 +42,7 @@ namespace Ecommerce.WebAPI.src.Repository
                         }
                         if (product.ProductLine != null)
                         {
-                            _databaseContext.Entry(product.Prod).State = EntityState.Detached;
+                            _databaseContext.Entry(product.ProductLine).State = EntityState.Detached;
                         }
                     }
                     await base.CreateOneAsync(createObject);
@@ -60,11 +60,22 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public override async Task<Order?> GetByIdAsync(Guid id)
         {
-            return await _orders.Include(u => u.orderItems).ThenInclude(v=>v.Product).ThenInclude(w=>w.ProductLine).Include(v => v.User).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
+            return await _orders.Include(u => u.orderItems).ThenInclude(v => v.Product).ThenInclude(w => w.ProductLine).Include(v => v.User).AsNoTracking().FirstOrDefaultAsync(u => u.Id == id);
         }
         public override async Task<IEnumerable<Order>> GetAllAsync(GetAllOptions getAllOptions)
         {
             return await _data.Include(u => u.orderItems).Include(v => v.User).AsNoTracking().Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+        }
+
+        public override async Task<bool> DeleteOneAsync(Order deleteObject)
+        {
+            if (await _data.AsNoTracking().FirstOrDefaultAsync(e => e.Id == deleteObject.Id) is null)
+            {
+                return false;
+            }
+            _orders.FromSqlRaw("Delete from table Orders where Id=", deleteObject.Id);
+            await _databaseContext.SaveChangesAsync();
+            return true;
         }
     }
 }
