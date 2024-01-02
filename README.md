@@ -94,7 +94,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
       To start the project first clone the project from the repository and run the node commands.
 
-      1. git clone https://github.com/sunilkarki2018/EcommerceApp.git
+      1. git clone https://github.com/sunilkarki2018/Ecommerce_Client.git
       2 . cd fs16_6-frontend-project
       3. git checkout develop
       4. npm install
@@ -104,7 +104,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
       To start the project first clone the project from the repository and install DotNet SDK 8.
 
-      1. git clone https://github.com/sunilkarki2018/fs16_CSharp-FullStack
+      1. git clone https://github.com/sunilkarki2018/Ecommerce_Server.git
       2. git checkout develop
       3. cd Ecommerce.WebApi
       4. DotNet run
@@ -135,5 +135,6 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
 ## Testing
 
-To run test: dotnet test
+   To run test, run following command in Ecommerce.Test project
+   - dotnet test
 
