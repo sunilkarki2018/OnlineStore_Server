@@ -37,9 +37,12 @@ namespace Ecommerce.WebAPI.src.Repository
                     }
                     var imageList = await _images.AsNoTracking().Where(u => u.ProductLineId == updateObject.Id).AsNoTracking().ToListAsync();
 
-                    for (int i = 0; i < imageList.Count; i++)
+                    if (imageList.Count > 0)
                     {
-                        _images.Remove(imageList[i]);
+                        for (int i = 0; i < imageList.Count; i++)
+                        {
+                            _images.Remove(imageList[i]);
+                        }
                     }
 
                     _data.Update(updateObject);
