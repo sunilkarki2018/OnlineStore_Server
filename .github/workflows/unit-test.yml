@@ -11,4 +11,4 @@ jobs:
               run: echo "Here is a message"
             - name: Run unit test
               run: dotnet test 
-              working-directory: Ecommerce/Ecommerce
+              working-directory: Ecommerce/Ecommerce.sln
