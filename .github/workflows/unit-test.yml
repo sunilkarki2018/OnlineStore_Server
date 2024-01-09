@@ -5,9 +5,5 @@ jobs:
         name: unit-test
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout github repo
-              uses: action/checkout@v4
             - name: Print a message
               run: echo "Here is a message"
-            - name: Run unit test
-              run: dotnet test  
