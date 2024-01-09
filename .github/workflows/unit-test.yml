@@ -10,4 +10,5 @@ jobs:
             - name: Print a message
               run: echo "Here is a message"
             - name: Run unit test
-              run: dotnet test  
+              run: dotnet test 
+              working-directory: Ecommerce/Ecommerce
