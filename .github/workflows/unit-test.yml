@@ -7,10 +7,6 @@ jobs:
     steps:
       - name: Checkout github repo
         uses: actions/checkout@v4
-      - name: Navigate to the Ecommerce folder
-        run: cd Ecommerce
-      - name: Print current directory
-        run: pwd
       - name: Run unit test
         run: |
           cd Ecommerce
