@@ -8,7 +8,7 @@ jobs:
             - name: Checkout github repo
               uses: actions/checkout@v4
             - name: Navigate to the Ecommerce folder
-              run: cd Ecommerce/Ecommerce.Test
+              run: cd Ecommerce
             - name: Print a message
               run: echo "Here is a message"
             - name: Run unit test
