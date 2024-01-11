@@ -1,15 +1,17 @@
 name: "Run unit test after pushing code"
 on: ["push"]
-jobs: 
-    unit-test:
-        name: unit-test
-        runs-on: ubuntu-latest
-        steps:
-            - name: Checkout github repo
-              uses: actions/checkout@v4
-            - name: Navigate to the Ecommerce folder
-              run: cd Ecommerce
-            - name: Print a message
-              run: echo "Here is a message"
-            - name: Run unit test
-              run: dotnet test 
+jobs:
+  unit-test:
+    name: unit-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout github repo
+        uses: actions/checkout@v4
+      - name: Navigate to the Ecommerce folder
+        run: cd Ecommerce
+      - name: Print current directory
+        run: pwd
+      - name: Run unit test
+        run: |
+          dotnet restore
+          dotnet test
