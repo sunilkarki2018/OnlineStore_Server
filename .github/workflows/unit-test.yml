@@ -13,5 +13,5 @@ jobs:
         run: pwd
       - name: Run unit test
         run: |
-          dotnet restore
+          cd Ecommerce
           dotnet test
