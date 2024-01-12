@@ -27,4 +27,4 @@ jobs:
         uses: docker/build-push-action@v5
         with:
            push: true
-           tags: sunilkarki2018/sunik-server
+           tags: sunilkarki2018/sunil-server
