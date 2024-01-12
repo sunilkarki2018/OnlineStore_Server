@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  frontend:
+    image: sunilkarki2018/sunil-client
+    ports:
+      - "3000:3000"
+  backend:
+    image: sunilkarki2018/sunil-backend
+    ports:
+      - "8080:8080"
