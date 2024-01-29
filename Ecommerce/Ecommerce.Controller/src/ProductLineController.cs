@@ -1,6 +1,7 @@
 using Ecommerce.Business.src.Abstractions;
 using Ecommerce.Business.src.DTOs;
 using Ecommerce.Business.src.Shared;
+using Ecommerce.Controller.src.ViewModels;
 using Ecommerce.Core.src.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -51,9 +52,6 @@ namespace Ecommerce.Controller.src
             return CreatedAtAction(nameof(CreateProductLineAsync), await _productLineService.CreateOneAsync(productLineCreateDTO));
         }
 
-
-
-
         [Authorize(Roles = "Admin")]
         [HttpPatch()]
         [Consumes("multipart/form-data")]
@@ -81,8 +79,6 @@ namespace Ecommerce.Controller.src
             }
             return CreatedAtAction(nameof(UpdateProductLineAsync), await _productLineService.UpdateOneAsync(productLineUpdateDTO.Id, productLineUpdateDTO));
         }
-
-
 
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id:guid}")]
@@ -131,23 +127,4 @@ namespace Ecommerce.Controller.src
             return Ok(productLineDTO);
         }
     }
-
-    public class ProductLineCreateForm
-    {
-        public string Title { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public Guid CategoryId { get; set; }
-        public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
-    }
-    public class ProductLineUpdateForm
-    {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
-        public Guid CategoryId { get; set; }
-        public List<IFormFile>? Images { get; set; } = new List<IFormFile>();
-    }
-
 }

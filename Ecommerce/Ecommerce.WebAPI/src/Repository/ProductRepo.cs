@@ -14,7 +14,12 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public override async Task<IEnumerable<Product>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            return await _data.Include(u => u.ProductLine).ThenInclude(v=>v.Images).Include(u => u.ProductSize).AsNoTracking().ToArrayAsync();
+            var query = _data.Include(u => u.ProductLine).ThenInclude(v => v.Images).Include(u => u.ProductSize).AsNoTracking();
+            if (!string.IsNullOrEmpty(getAllOptions.SearchKey))
+            {
+                query = query.Where(u => u.ProductLine.Title.ToLower().Contains(getAllOptions.SearchKey.ToLower()));
+            }
+            return await query.Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToListAsync();
         }
 
         public override async Task<Product?> GetByIdAsync(Guid id)

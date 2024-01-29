@@ -31,12 +31,12 @@ namespace Ecommerce.WebAPI.src.Repository
 
         public override async Task<IEnumerable<User>> GetAllAsync(GetAllOptions getAllOptions)
         {
-            return await _data.AsNoTracking().Include(u => u.Address).Include(u => u.Avatar).Where(u => u.FirstName.Contains(getAllOptions.Search) || u.LastName.Contains(getAllOptions.Search)).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
+            return await _data.AsNoTracking().Include(u => u.Address).Include(u => u.Avatar).Where(u => u.FirstName.Contains(getAllOptions.SearchKey) || u.LastName.Contains(getAllOptions.SearchKey)).Skip(getAllOptions.Offset).Take(getAllOptions.Limit).ToArrayAsync();
         }
 
         public async Task<int> GetUserRecordCountAsync(GetAllOptions getAllOptions)
         {
-            return await _data.Where(u => u.FirstName.Contains(getAllOptions.Search) || u.LastName.Contains(getAllOptions.Search)).CountAsync();
+            return await _data.Where(u => u.FirstName.Contains(getAllOptions.SearchKey) || u.LastName.Contains(getAllOptions.SearchKey)).CountAsync();
         }
 
     }

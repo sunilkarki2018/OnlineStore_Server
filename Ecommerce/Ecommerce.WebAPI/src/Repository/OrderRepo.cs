@@ -73,7 +73,7 @@ namespace Ecommerce.WebAPI.src.Repository
             {
                 return false;
             }
-            _orders.FromSqlRaw("Delete from table Orders where Id=", deleteObject.Id);
+            _orders.Remove(deleteObject);
             await _databaseContext.SaveChangesAsync();
             return true;
         }

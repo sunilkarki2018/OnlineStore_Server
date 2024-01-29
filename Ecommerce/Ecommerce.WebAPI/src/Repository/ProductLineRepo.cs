@@ -3,7 +3,6 @@ using Ecommerce.Core.src.Entities;
 using Ecommerce.Core.src.Shared;
 using Ecommerce.WebAPI.src.Database;
 using Microsoft.EntityFrameworkCore;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Ecommerce.WebAPI.src.Repository
 {

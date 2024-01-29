@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Business.src.Abstractions
 {
-    public interface IAvatarService 
-        {
+    public interface IAvatarService
+    {
         Task<string> CreateAvatarAsync(AvatarCreateDTO avatarCreateDTO);
         Task<string> GetAvatarByUserIdAsync(Guid userId);
     }
