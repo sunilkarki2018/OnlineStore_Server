@@ -81,7 +81,6 @@ This is an Ecommerce application design and deployed as a final assignment in In
       * Create,Delete,Update and Retrieve Users
 
    2. Customer
-      * Retrieve Product Lines
       * Retrieve Products
       * Retrieve Categories
       * Create Orders
@@ -94,8 +93,8 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
       To start the project first clone the project from the repository and run the node commands.
 
-      1. git clone https://github.com/sunilkarki2018/Ecommerce_Client.git
-      2 . cd fs16_6-frontend-project
+      1. git clone https://github.com/sunilkarki2018/OnlineStore_Client.git
+      2  cd OnlineStore_Client
       3. git checkout develop
       4. npm install
       5. npm start
@@ -104,7 +103,8 @@ This is an Ecommerce application design and deployed as a final assignment in In
 
       To start the project first clone the project from the repository and install DotNet SDK 8.
 
-      1. git clone https://github.com/sunilkarki2018/Ecommerce_Server.git
+      1. git clone https://github.com/sunilkarki2018/OnlineStore_Server.git
+      2. cd OnlineStore_Server
       2. git checkout develop
       3. cd Ecommerce.WebApi
       4. DotNet run
@@ -131,7 +131,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
    Password: customer123
 
    ## Swagger Link
-   https://ecommerce2024v1.azurewebsites.net/swagger/index.html
+   https://onlinestore2024.azurewebsites.net/swagger/index.html
 
 ## Testing
 

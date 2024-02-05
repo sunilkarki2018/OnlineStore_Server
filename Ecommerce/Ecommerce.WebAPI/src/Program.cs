@@ -100,7 +100,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
 builder.Services.AddTransient<ExceptionHandlerMiddleware>();
 
 
-var connectionString = builder.Configuration.GetConnectionString("AzureDb");
+var connectionString = builder.Configuration.GetConnectionString("ElephantDb");
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(connectionString);
 dataSourceBuilder.MapEnum<Role>();
 dataSourceBuilder.MapEnum<OrderStatus>();
