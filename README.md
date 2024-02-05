@@ -120,7 +120,7 @@ This is an Ecommerce application design and deployed as a final assignment in In
 ## Deplyoment Link
 
    ## Application Link
-   https://bucolic-semifreddo-2378d4.netlify.app/
+   https://develop--sensational-piroshki-b033c0.netlify.app/
 
    Admin Credentials
    Username: admin@mail.com
